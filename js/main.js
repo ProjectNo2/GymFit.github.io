@@ -23,20 +23,28 @@ const textWhiteClass = "text-white";
 const pFooterClass = "text-sm mt-2 text-white-50";
 const h4Class = "mb-4 text-white letter-spacing text-uppercase";
 const containerForFooterBlocks = document.querySelector("#containerFooter");
+const sectionClass = "page-title bg-2";
 
 //#endregion
 
 let pathNameArray = window.location.pathname.split('/')
 let pathName = '/'+pathNameArray[pathNameArray.length-1]
-if(pathName == '/index.html'){
 
-    //#region index.html
+function createElementWithClass(tag, className) {
+    let element = document.createElement(tag);
+    element.className = className;
+    return element;
+}
+
+function appendChildToParent(parent, child) {
+    parent.appendChild(child);
+}
 
 //#region NAVIGATION
 
 //NAVIGATION LINKS
 
-let navigationLinks = {
+var navigationLinks = {
     Home : `<li class="nav-item active">
 				<a class="nav-link" href="index.html">Home<span class="sr-only">(current)<span>
                 </a>
@@ -55,18 +63,16 @@ let navigationLinks = {
     Contact : `<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>`,
     Author : `<li class="nav-item"><a class="nav-link" href="author.html">Author</a></li>`
 };
-let navPrint = "";
+var navPrint = "";
 for (let link in navigationLinks) {
     navPrint += navigationLinks[link];
 }
 
-function printNavigationLinks(){
-    return navPrint;
-}
+
 
 // NAVIGATION BAR
 
-let navigationObj = {
+var navigationObj = {
 
     divClass : "container-fluid",
 
@@ -91,7 +97,7 @@ let navigationObj = {
 
 };
 
-let navigation =`<div class="${navigationObj.divClass}">
+var navigation =`<div class="${navigationObj.divClass}">
                     <a class="${navigationObj.aClass}" href="${index}">
                         <h2 class="${navigationObj.h2Class}">${navigationObj.h2Content}</h2>
                     </a>
@@ -113,17 +119,117 @@ function printNavigation(){
 
 
 
+
 //#endregion
+
+//#region NAVIGATION FOR OTHER PAGES
+
+function returnPageName(input) {
+    
+    let name = input.replace("/", "").split(".");
+    return name[0];
+};
+
+function findPageName(pathName) {
+    let pageLink = ["about", "trainer", "course","membership", "contact"];
+    let currentPage = returnPageName(pathName);
+
+    for (let i in pageLink) {
+        if (currentPage === pageLink[i]) {
+            return pageLink[i];
+        }
+    }
+};
+var currentPage = findPageName(pathName);
+console.log(pathName);
+
+let navigationForOtherPages ={
+
+    sectionClass : sectionClass,
+
+    divClass : "container",
+
+    innerDivClass : "row",
+
+    ulDivClass : "col-lg-12 text-center",
+
+    ulClass : "list-inline mb-0",
+
+    liTag : 
+    [
+            `<li class="list-inline-item"><a href="${index}" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a></li>`,
+
+            `<li class="list-inline-item"><span class="text-white">|</span></li>`,
+
+            `<li class="list-inline-item"><a href="#" class="text-color text-uppercase text-sm letter-spacing">${currentPage}</a></li>`
+    ],
+
+    h1Class : "text-lg text-white mt-2",
+
+    h1 : "What we are"
+
+}
+
+var printNavForOtherPages=`<div class="${navigationForOtherPages.divClass}">
+                            <div class="${navigationForOtherPages.innerDivClass}">
+                                <div class="${navigationForOtherPages.ulDivClass}">
+                                    <ul class="${navigationForOtherPages.ulClass}">`
+for(let n in navigationForOtherPages.aText){
+    
+    printNavForOtherPages+=`<li class="${navigationForOtherPages.liClass}">
+                                <a href="${index}" class="${navigationForOtherPages.aClass[n]}">
+                                    ${navigationForOtherPages.aText[n]}
+                                </a>
+                            </li>`
+}
+
+
+//#endregion
+
+//#region GALLERY
+
+var galleryClass ="col-lg-3 col-md-6 col-sm-6";
+
+var galleryImgClass ="popup-gallery";
+
+var ImgFluidClass ="img-fluid";
+
+var galleryImgLink = new Array("images/gallery/gallery-01.jpg","images/gallery/gallery-02.jpg","images/gallery/gallery-03.jpg","images/gallery/gallery-04.jpg","images/gallery/gallery-05.jpg","images/gallery/gallery-06.jpg","images/gallery/gallery-07.jpg","images/gallery/gallery-08.jpg");
+
+var galleryPrint ="";
+
+for(img in galleryImgLink){
+    galleryPrint+=`<div class="${galleryClass}">
+                    <a href="${galleryImgLink[img]}" class="${galleryImgClass}">
+                        <img src="${galleryImgLink[img]}" alt="gym-workout${img}" class="${ImgFluidClass}">
+                    </a>
+                  </div>`
+};
+gallery.innerHTML = galleryPrint;
+
+
+
+
+
+//#endregion
+
+
+
+
+
+if(pathName == '/index.html'){
+
+    //#region index.html
 
 //#region ROW-BLOCKS
 
 
-let rowInnerBlock = new Array("card p-5 border-0 rounded-top border-bottom position-relative hover-style-1","card p-5 border-0 rounded-top hover-style-1","card p-5 border-0 rounded-top hover-style-1");
-let rowNumbers = new Array("<span class='number'>01</span>","<span class='number'>02</span>","<span class='number'>03</span>");
-let innerBlockHeader = new Array("Modern Equipment","Proffesional Trainer","Healthy Diet Plan");
-let innerText = new Array("Start using the latest machines for maximum results and safety. Modern tools for every fitness level!","Train with experienced professionals dedicated to your progress. Years of expertise to guide you to success.","Customized meal plans to complement your workouts. Eat smart, feel great!");
+var rowInnerBlock = new Array("card p-5 border-0 rounded-top border-bottom position-relative hover-style-1","card p-5 border-0 rounded-top hover-style-1","card p-5 border-0 rounded-top hover-style-1");
+var rowNumbers = new Array("<span class='number'>01</span>","<span class='number'>02</span>","<span class='number'>03</span>");
+var innerBlockHeader = new Array("Modern Equipment","Proffesional Trainer","Healthy Diet Plan");
+var innerText = new Array("Start using the latest machines for maximum results and safety. Modern tools for every fitness level!","Train with experienced professionals dedicated to your progress. Years of expertise to guide you to success.","Customized meal plans to complement your workouts. Eat smart, feel great!");
 
-let moreDetailsLink =`<a href="about.html" class="text-color text-uppercase font-size-13 letter-spacing font-weight-bold"><i class="ti-minus mr-2 "></i>More Details</a>`;
+var moreDetailsLink =`<a href="about.html" class="text-color text-uppercase font-size-13 letter-spacing font-weight-bold"><i class="ti-minus mr-2 "></i>More Details</a>`;
 
 var rowInnerHTML ="";
 for(i in innerBlockHeader){
@@ -143,19 +249,19 @@ rowH.innerHTML = rowInnerHTML;
 
 //#region SECTION
 //#region bez createElement
-let osbSection = document.querySelector("#osbSection");
+var osbSection = document.querySelector("#osbSection");
 
-let ourServicesBlock ="col-lg-4 col-md-6 col-sm-6";
+var ourServicesBlock ="col-lg-4 col-md-6 col-sm-6";
 
-let ourServicesInnerBlock ="text-center px-4 py-5 hover-style-1";
+var ourServicesInnerBlock ="text-center px-4 py-5 hover-style-1";
 
-let osbIcons = new Array("icofont-gym-alt-2","icofont-cycling-alt","icofont-gym-alt-3","icofont-muscle","icofont-dumbbell","icofont-gym");
+var osbIcons = new Array("icofont-gym-alt-2","icofont-cycling-alt","icofont-gym-alt-3","icofont-muscle","icofont-dumbbell","icofont-gym");
 
-let osbInnerHeader = new Array("Weight Lifting","Cycling","Yoga Meditation","Body Building","Fitness Track","Fitness");
+var osbInnerHeader = new Array("Weight Lifting","Cycling","Yoga Meditation","Body Building","Fitness Track","Fitness");
 
-let osbInnerh4 ="mt-3 mb-4 text-uppercase";
+var osbInnerh4 ="mt-3 mb-4 text-uppercase";
 
-let osbInnerText = new Array(
+var osbInnerText = new Array(
     "Build strength and improve muscle tone with effective weightlifting routines. Achieve your fitness goals with guided techniques and proper form.",
 
     "Boost your endurance and burn calories with high-energy cycling sessions. Enjoy a fun and effective way to improve cardiovascular health.",
@@ -169,7 +275,7 @@ let osbInnerText = new Array(
     "Improve your overall health with dynamic fitness programs designed for all levels. Stay active, energized, and committed to a healthier lifestyle."
 );
 
-// let sectionPrint ="";
+// var sectionPrint ="";
 // for(s in osbInnerHeader){
 //     sectionPrint+=`<div class="${ourServicesBlock}">
 //                     <div class="${ourServicesInnerBlock}">
@@ -182,15 +288,7 @@ let osbInnerText = new Array(
 // osbSection.innerHTML = sectionPrint;
 //#endregion
 
-function createElementWithClass(tag, className) {
-    let element = document.createElement(tag);
-    element.className = className;
-    return element;
-}
 
-function appendChildToParent(parent, child) {
-    parent.appendChild(child);
-}
 
 osbIcons.forEach((icon, index) => {
     
@@ -218,40 +316,11 @@ osbIcons.forEach((icon, index) => {
 
 //#endregion
 
-//#region GALLERY
 
-
-
-let galleryClass ="col-lg-3 col-md-6 col-sm-6";
-
-let galleryImgClass ="popup-gallery";
-
-var ImgFluidClass ="img-fluid";
-
-let galleryImgLink = new Array("images/gallery/gallery-01.jpg","images/gallery/gallery-02.jpg","images/gallery/gallery-03.jpg","images/gallery/gallery-04.jpg","images/gallery/gallery-05.jpg","images/gallery/gallery-06.jpg","images/gallery/gallery-07.jpg","images/gallery/gallery-08.jpg");
-
-let galleryPrint ="";
-
-for(img in galleryImgLink){
-    galleryPrint+=`<div class="${galleryClass}">
-                    <a href="${galleryImgLink[img]}" class="${galleryImgClass}">
-                        <img src="${galleryImgLink[img]}" alt="gym-workout${img}" class="${ImgFluidClass}">
-                    </a>
-                  </div>`
-};
-gallery.innerHTML = galleryPrint;
-
-
-
-
-
-//#endregion
 
 //#region CONTAINER
 
-
-
-let containers = [
+var containers = [
     {
         blockClass : "text-center mb-4",
 
@@ -338,7 +407,7 @@ let containers = [
     }
 ];
 
-let containerPrint = "";
+var containerPrint = "";
 containers.forEach(containerObj => {
     containerPrint += `<div class="${containerObj.blockClass}">
                           <i class="${containerObj.icon}"></i>
@@ -358,28 +427,28 @@ container.innerHTML = containerPrint;
 
 
 
-let pcBlockClass = "col-lg-3 col-md-6";
+var pcBlockClass = "col-lg-3 col-md-6";
 
-let pcInnerBlockClass = "card border-0 rounded-0 p-0 mb-5 mb-lg-0 shadow-sm";
+var pcInnerBlockClass = "card border-0 rounded-0 p-0 mb-5 mb-lg-0 shadow-sm";
 
-let pcImgLinks = new Array("images/gallery/course-1.jpg","images/gallery/course-2.jpg","images/gallery/course-3.jpg","images/gallery/course-4.jpg","images/gallery/course-5.jpg","images/gallery/course-6.jpg",);
+var pcImgLinks = new Array("images/gallery/course-1.jpg","images/gallery/course-2.jpg","images/gallery/course-3.jpg","images/gallery/course-4.jpg","images/gallery/course-5.jpg","images/gallery/course-6.jpg",);
 
-let pcLinkClass = "card-body";
+var pcLinkClass = "card-body";
 
-let pcLink = "course.html";
+var pcLink = "course.html";
 
-let pcH4Class = "font-secondary mb-0";
+var pcH4Class = "font-secondary mb-0";
 
-let pcH4Text = new Array("Functional Fitness Training","Strength and Conditioning","Core Strengthening","Cardio and Endurance","Yoga and Flexibility","Dumbbell Strength Workout");
+var pcH4Text = new Array("Functional Fitness Training","Strength and Conditioning","Core Strengthening","Cardio and Endurance","Yoga and Flexibility","Dumbbell Strength Workout");
 
-let pcPClass = "mb-2";
+var pcPClass = "mb-2";
 
-let pcTextJob = new Array("Mentor","Trainer","Instructor","Coach","Manager","Specialist");
+var pcTextJob = new Array("Mentor","Trainer","Instructor","Coach","Manager","Specialist");
 
-let pcPText = new Array("John Carter","Emily Dawson","Michael Reeves","Sarah Blake","David Hamilton","Laura Mitchell");
+var pcPText = new Array("John Carter","Emily Dawson","Michael Reeves","Sarah Blake","David Hamilton","Laura Mitchell");
 
 
-let pcPrint ="";
+var pcPrint ="";
 
 for(let i = 0; i < 4; i++){
     pcPrint+=`<div class="${pcBlockClass}">
@@ -406,10 +475,9 @@ popularCourses.innerHTML = pcPrint;
 
 //#region FOOTER
 
-
 //#region FOOTER-TEXT
 
-let footerTextObj = {
+var footerTextObj = {
 
     class : footerBlockClass,
 
@@ -423,7 +491,7 @@ let footerTextObj = {
 
 };
 
-let footerTextPrint ="";
+var footerTextPrint ="";
 
 footerTextPrint+=`<div class="${footerTextObj.class}">
                     <h2 class="${footerTextObj.h2Class}">
@@ -437,7 +505,7 @@ footerTextPrint+=`<div class="${footerTextObj.class}">
 
 //#region FOOTER WORKING TIME
 
-let workingTimeObj = {
+var workingTimeObj = {
 
     blockClass : "col-lg-3 col-md-6 mb-5 mb-lg-0",
 
@@ -458,7 +526,7 @@ let workingTimeObj = {
 };
 
 
-let footerWorkingTimePrint ="";
+var footerWorkingTimePrint ="";
 
 footerWorkingTimePrint+=`<div class="${workingTimeObj.blockClass}.w-auto">
                             <div class="${workingTimeObj.innerClass}">
@@ -478,7 +546,7 @@ footerWorkingTimePrint+=`   </div>
 
 //#region FOOTER QUICK LINKS
 
-let quickLinksObj = {
+var quickLinksObj = {
 
     blockClass : "col-lg-2 col-md-5 mb-5 mb-lg-0",
 
@@ -496,7 +564,7 @@ let quickLinksObj = {
 
 };
 
-let quickLinksPrint = "";
+var quickLinksPrint = "";
 
 quickLinksPrint+=`<div class="${quickLinksObj.blockClass}">
                     <div class="${quickLinksObj.innerCLass}">
@@ -516,7 +584,7 @@ quickLinksPrint+=`      </ul>
 
 //#region CONTACT INFORMATION
 
-let contactInformationObj = {
+var contactInformationObj = {
 
     blockClass : "col-lg-3 col-md-5",
 
@@ -534,7 +602,7 @@ let contactInformationObj = {
 
 };
 
-let contactInformationPrint=`<div class="${contactInformationObj.blockClass}">
+var contactInformationPrint=`<div class="${contactInformationObj.blockClass}">
                                 <div class="${contactInformationObj.innerClass}">
                                     <h4 class="${contactInformationObj.h4Class}">Contact Information</h4>
                                     <p>
@@ -552,7 +620,7 @@ let contactInformationPrint=`<div class="${contactInformationObj.blockClass}">
 
 //#region COPYRIGHT LINKS
 
-let footerLinksObj = {
+var footerLinksObj = {
 
     blockClass : "row align-items-center mt-5 px-3 bg-black mx-1",
 
@@ -586,7 +654,7 @@ let footerLinksObj = {
 
 };
 
-let footerLinkPrint =`<div class="${footerLinksObj.blockClass}">
+var footerLinkPrint =`<div class="${footerLinksObj.blockClass}">
                         <div class="${footerLinksObj.divClass}">
                             ${footerLinksObj.copyrightText}
                         </div>
@@ -605,7 +673,7 @@ footerLinkPrint+=`          </ul>
 
 //#endregion
 
-let allFooterBlocks=`<div class="container" id="${containerForFooterBlocks}">
+var allFooterBlocks=`<div class="container" id="${containerForFooterBlocks}">
                         <div class="row" id="${footerBlocks}">
                             ${footerTextPrint}
                             ${footerWorkingTimePrint}
@@ -617,7 +685,7 @@ let allFooterBlocks=`<div class="container" id="${containerForFooterBlocks}">
                         
                         ${footerLinkPrint}
                     </div>`
-let footer = document.querySelector('footer').innerHTML = allFooterBlocks;
+var footer = document.querySelector('footer').innerHTML = allFooterBlocks;
 
 function printFooter(){
     return footer;
@@ -628,7 +696,7 @@ function printFooter(){
 
 //#endregion
 
-}
+};
 
 if(pathName == '/about.html'){
 
@@ -636,14 +704,12 @@ if(pathName == '/about.html'){
 
     navigationId.innerHTML = printNavigation();
 
-    
-
 
 
 
 
     //#endregion
-}
+};
 
 
 
