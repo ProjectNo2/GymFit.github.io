@@ -40,6 +40,7 @@ function appendChildToParent(parent, child) {
     parent.appendChild(child);
 }
 
+
 //#region NAVIGATION
 
 //NAVIGATION LINKS
@@ -122,105 +123,6 @@ function printNavigation(){
 
 //#endregion
 
-//#region NAVIGATION FOR OTHER PAGES
-
-function returnPageName(input) {
-    
-    let name = input.replace("/", "").split(".");
-    return name[0];
-};
-
-function findPageName(pathName) {
-    let pageLink = ["about", "trainer", "course","membership", "contact"];
-    let currentPage = returnPageName(pathName);
-
-    for (let i in pageLink) {
-        if (currentPage === pageLink[i]) {
-            return pageLink[i];
-        }
-    }
-};
-var currentPage = findPageName(pathName);
-console.log(pathName);
-
-let navigationForOtherPages ={
-
-    sectionClass : sectionClass,
-
-    divClass : "container",
-
-    innerDivClass : "row",
-
-    ulDivClass : "col-lg-12 text-center",
-
-    ulClass : "list-inline mb-0",
-
-    liTag : 
-    [
-            `<li class="list-inline-item"><a href="${index}" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a></li>`,
-
-            `<li class="list-inline-item"><span class="text-white">|</span></li>`,
-
-            `<li class="list-inline-item"><a href="#" class="text-color text-uppercase text-sm letter-spacing">${currentPage}</a></li>`
-    ],
-
-    h1Class : "text-lg text-white mt-2",
-
-    h1 : "What we are"
-
-}
-
-var printNavForOtherPages=`<div class="${navigationForOtherPages.divClass}">
-                            <div class="${navigationForOtherPages.innerDivClass}">
-                                <div class="${navigationForOtherPages.ulDivClass}">
-                                    <ul class="${navigationForOtherPages.ulClass}">`
-for(let n in navigationForOtherPages.aText){
-    
-    printNavForOtherPages+=`<li class="${navigationForOtherPages.liClass}">
-                                <a href="${index}" class="${navigationForOtherPages.aClass[n]}">
-                                    ${navigationForOtherPages.aText[n]}
-                                </a>
-                            </li>`
-}
-
-
-//#endregion
-
-//#region GALLERY
-
-var galleryClass ="col-lg-3 col-md-6 col-sm-6";
-
-var galleryImgClass ="popup-gallery";
-
-var ImgFluidClass ="img-fluid";
-
-var galleryImgLink = new Array("images/gallery/gallery-01.jpg","images/gallery/gallery-02.jpg","images/gallery/gallery-03.jpg","images/gallery/gallery-04.jpg","images/gallery/gallery-05.jpg","images/gallery/gallery-06.jpg","images/gallery/gallery-07.jpg","images/gallery/gallery-08.jpg");
-
-var galleryPrint ="";
-
-for(img in galleryImgLink){
-    galleryPrint+=`<div class="${galleryClass}">
-                    <a href="${galleryImgLink[img]}" class="${galleryImgClass}">
-                        <img src="${galleryImgLink[img]}" alt="gym-workout${img}" class="${ImgFluidClass}">
-                    </a>
-                  </div>`
-};
-gallery.innerHTML = galleryPrint;
-
-
-
-
-
-//#endregion
-
-
-
-
-
-if(pathName == '/index.html'){
-
-    //#region index.html
-
 //#region ROW-BLOCKS
 
 
@@ -248,7 +150,7 @@ rowH.innerHTML = rowInnerHTML;
 //#endregion
 
 //#region SECTION
-//#region bez createElement
+
 var osbSection = document.querySelector("#osbSection");
 
 var ourServicesBlock ="col-lg-4 col-md-6 col-sm-6";
@@ -286,8 +188,6 @@ var osbInnerText = new Array(
 //                    </div>`
 // }
 // osbSection.innerHTML = sectionPrint;
-//#endregion
-
 
 
 osbIcons.forEach((icon, index) => {
@@ -311,14 +211,32 @@ osbIcons.forEach((icon, index) => {
     appendChildToParent(osbSection,outerDiv);
 });
 
+//#endregion
 
+//#region GALLERY
 
+var galleryClass ="col-lg-3 col-md-6 col-sm-6";
+
+var galleryImgClass ="popup-gallery";
+
+var ImgFluidClass ="img-fluid";
+
+var galleryImgLink = new Array("images/gallery/gallery-01.jpg","images/gallery/gallery-02.jpg","images/gallery/gallery-03.jpg","images/gallery/gallery-04.jpg","images/gallery/gallery-05.jpg","images/gallery/gallery-06.jpg","images/gallery/gallery-07.jpg","images/gallery/gallery-08.jpg");
+
+var galleryPrint ="";
+
+for(img in galleryImgLink){
+    galleryPrint+=`<div class="${galleryClass}">
+                    <a href="${galleryImgLink[img]}" class="${galleryImgClass}">
+                        <img src="${galleryImgLink[img]}" alt="gym-workout${img}" class="${ImgFluidClass}">
+                    </a>
+                  </div>`
+};
+gallery.innerHTML = galleryPrint;
 
 //#endregion
 
-
-
-//#region CONTAINER
+//#region WHAT PEOPLE SAY
 
 var containers = [
     {
@@ -425,8 +343,6 @@ container.innerHTML = containerPrint;
 
 //#region POPULAR COURSES
 
-
-
 var pcBlockClass = "col-lg-3 col-md-6";
 
 var pcInnerBlockClass = "card border-0 rounded-0 p-0 mb-5 mb-lg-0 shadow-sm";
@@ -468,8 +384,6 @@ for(let i = 0; i < 4; i++){
 }
 
 popularCourses.innerHTML = pcPrint;
-
-
 
 //#endregion
 
@@ -673,6 +587,7 @@ footerLinkPrint+=`          </ul>
 
 //#endregion
 
+//#region copy all footer blocks
 var allFooterBlocks=`<div class="container" id="${containerForFooterBlocks}">
                         <div class="row" id="${footerBlocks}">
                             ${footerTextPrint}
@@ -690,25 +605,98 @@ var footer = document.querySelector('footer').innerHTML = allFooterBlocks;
 function printFooter(){
     return footer;
 }
+//#endregion
+
 
 
 //#endregion
 
-//#endregion
 
-};
+
+
+
+
+
+
 
 if(pathName == '/about.html'){
 
     //#region about.html
 
-    navigationId.innerHTML = printNavigation();
+//#region NAVIGATION FOR OTHER PAGES
+
+function returnPageName(input) {
+    
+    let name = input.replace("/", "").split(".");
+    return name[0];
+};
+
+function findPageName(pathName) {
+    let pageLink = ["about", "trainer", "course","membership", "contact"];
+    let currentPage = returnPageName(pathName);
+
+    for (let i in pageLink) {
+        if (currentPage === pageLink[i]) {
+            return pageLink[i];
+        }
+    }
+};
+var currentPage = findPageName(pathName);
+console.log(pathName);
+
+let navigationForOtherPages ={
+
+    sectionClass : sectionClass,
+
+    divClass : "container",
+
+    innerDivClass : "row",
+
+    ulDivClass : "col-lg-12 text-center",
+
+    ulClass : "list-inline mb-0",
+
+    liTag : 
+    [
+            `<li class="list-inline-item"><a href="${index}" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a></li>`,
+
+            `<li class="list-inline-item"><span class="text-white">|</span></li>`,
+
+            `<li class="list-inline-item"><a href="#" class="text-color text-uppercase text-sm letter-spacing">${currentPage}</a></li>`
+    ],
+
+    h1Class : "text-lg text-white mt-2",
+
+    h1 : "What we are"
+
+};
+
+var printNavForOtherPages=`<div class="${navigationForOtherPages.divClass}">
+                            <div class="${navigationForOtherPages.innerDivClass}">
+                                <div class="${navigationForOtherPages.ulDivClass}">
+                                    <ul class="${navigationForOtherPages.ulClass}">`;
+for(let n in navigationForOtherPages.aText){  
+printNavForOtherPages+=`                ${navigationForOtherPages.liTag[n]}`;
+}
+printNavForOtherPages+=`            </ul>
+                                        <h1 class="${navigationForOtherPages.h1Class}">
+                                            ${navigationForOtherPages.h1}
+                                        </h1>
+                                </div>
+                            </div>
+                        </div>`;
+
+console.log(printNavForOtherPages);
+
+//#endregion
 
 
 
 
 
-    //#endregion
+
+//#endregion
+
 };
 
 
