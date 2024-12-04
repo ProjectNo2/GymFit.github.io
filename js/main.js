@@ -9,7 +9,7 @@ const membership = "membership.html";
 const contact = "contact.html";
 const author = "author.html";
 const navUL = document.querySelector(".navbar-nav");
-const navigationId = document.querySelector("nav");
+const navigationTag = document.querySelector("nav");
 const h2Class = "text-white text-capitalize";
 const rowH = document.querySelector("#rowH");
 const rowBlocksClass = "col-lg-4 col-md-6";
@@ -24,7 +24,8 @@ const pFooterClass = "text-sm mt-2 text-white-50";
 const h4Class = "mb-4 text-white letter-spacing text-uppercase";
 const containerForFooterBlocks = document.querySelector("#containerFooter");
 const sectionClass = "page-title bg-2";
-
+const sectionNavId = document.querySelector("#navigationHeader");
+const whyChooseUsID = document.querySelector("#whyChooseUS");
 //#endregion
 
 let pathNameArray = window.location.pathname.split('/')
@@ -41,64 +42,60 @@ function appendChildToParent(parent, child) {
 }
 
 
-//#region NAVIGATION
-
-//NAVIGATION LINKS
-
-var navigationLinks = {
-    Home : `<li class="nav-item active">
-				<a class="nav-link" href="index.html">Home<span class="sr-only">(current)<span>
-                </a>
-		    </li>`,
-    Services : `<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="index.html" data-toggle="dropdown"                 aria-haspopup="true"
-					aria-expanded="false">Services
-                </a>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="about.html">About</a></li>
-					<li><a class="dropdown-item" href="trainer.html">Trainer</a></li>
-					<li><a class="dropdown-item" href="course.html">Courses</a></li>
-				</ul>
-			</li>`,
-    Membership : `<li class="nav-item"><a class="nav-link" href="membership.html">Membership</a></li>`,
-    Contact : `<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>`,
-    Author : `<li class="nav-item"><a class="nav-link" href="author.html">Author</a></li>`
-};
-var navPrint = "";
-for (let link in navigationLinks) {
-    navPrint += navigationLinks[link];
-}
 
 
 
-// NAVIGATION BAR
+function printNavigationBar() {
+    var navigationLinks = {
+        Home: `<li class="nav-item active">
+            <a class="nav-link" href="index.html">Home<span class="sr-only">(current)<span>
+            </a>
+        </li>`,
+        Services: `<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="index.html" data-toggle="dropdown"                 aria-haspopup="true"
+                aria-expanded="false">Services
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="about.html">About</a></li>
+                <li><a class="dropdown-item" href="trainer.html">Trainer</a></li>
+                <li><a class="dropdown-item" href="course.html">Courses</a></li>
+            </ul>
+        </li>`,
+        Membership: `<li class="nav-item"><a class="nav-link" href="membership.html">Membership</a></li>`,
+        Contact: `<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>`,
+        Author: `<li class="nav-item"><a class="nav-link" href="author.html">Author</a></li>`
+    };
+    var navPrint = "";
+    for (let link in navigationLinks) {
+        navPrint += navigationLinks[link];
+    }
 
-var navigationObj = {
 
-    divClass : "container-fluid",
+    // NAVIGATION BAR
+    var navigationObj = {
+        divClass: "container-fluid",
 
-    aClass : "navbar-brand",
+        aClass: "navbar-brand",
 
-    href : index,
+        href: index,
 
-    h2Class : h2Class,
+        h2Class: h2Class,
 
-    h2Content : '</i>Gym<span class="text-color">Fit</span>',
+        h2Content: '</i>Gym<span class="text-color">Fit</span>',
 
-    buttonClass : `navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsid"
+        buttonClass: `navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsid"
 			        aria-controls="navbarsid" aria-expanded="false" aria-label="Toggle navigation`,
-    
-    spanClass : "ti-view-list",
 
-    innerDivClass : "collapse text-center navbar-collapse",
+        spanClass: "ti-view-list",
 
-    innerDivId : "navbarsid",
+        innerDivClass: "collapse text-center navbar-collapse",
 
-    ulClass : "navbar-nav mx-auto"
+        innerDivId: "navbarsid",
 
-};
+        ulClass: "navbar-nav mx-auto"
+    };
 
-var navigation =`<div class="${navigationObj.divClass}">
+    var navigation = `<div class="${navigationObj.divClass}">
                     <a class="${navigationObj.aClass}" href="${index}">
                         <h2 class="${navigationObj.h2Class}">${navigationObj.h2Content}</h2>
                     </a>
@@ -112,19 +109,317 @@ var navigation =`<div class="${navigationObj.divClass}">
                     </div>
                 </div>`;
 
-navigationId.innerHTML = printNavigation();
+    navigationTag.innerHTML = navigation;
+}
 
-function printNavigation(){
-    return navigation;
+function printSectionNavigationForOtherPages() {
+    function returnPageName(input) {
+
+        let name = input.replace("/", "").split(".");
+        return name[0];
+    };
+
+    function findPageName(pathName) {
+        let pageLink = ["about", "trainer", "course", "membership", "contact"];
+        let currentPage = returnPageName(pathName);
+
+        for (let i in pageLink) {
+            if (currentPage === pageLink[i]) {
+                return pageLink[i];
+            }
+        }
+    };
+
+
+
+
+    var currentPage = findPageName(pathName);
+
+    let navigationForOtherPages = {
+        sectionClass: sectionClass,
+
+        divClass: "container",
+
+        innerDivClass: "row",
+
+        ulDivClass: "col-lg-12 text-center",
+
+        ulClass: "list-inline mb-0",
+
+        liTag: [
+            `<li class="list-inline-item"><a href="${index}" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a></li>`,
+
+            `<li class="list-inline-item"><span class="text-white">|</span></li>`,
+
+            `<li class="list-inline-item"><a href="#" class="text-color text-uppercase text-sm letter-spacing">${currentPage}</a></li>`
+        ],
+
+        h1Class: "text-lg text-white mt-2",
+
+        h1: "What we are"
+    };
+
+    var printNavForOtherPages = `<div class="${navigationForOtherPages.divClass}">
+                            <div class="${navigationForOtherPages.innerDivClass}">
+                                <div class="${navigationForOtherPages.ulDivClass}">
+                                    <ul class="${navigationForOtherPages.ulClass}">`;
+    for (let n in navigationForOtherPages.liTag) {
+        printNavForOtherPages += `              ${navigationForOtherPages.liTag[n]}`;
+    }
+    printNavForOtherPages += `            </ul>
+                                        <h1 class="${navigationForOtherPages.h1Class}">
+                                            ${navigationForOtherPages.h1}
+                                        </h1>
+                                </div>
+                            </div>
+                        </div>`;
+
+    sectionNavId.innerHTML = printNavForOtherPages;
+}
+
+function printGallery() {
+    var galleryClass = "col-lg-3 col-md-6 col-sm-6";
+
+    var galleryImgClass = "popup-gallery";
+
+    var ImgFluidClass = "img-fluid";
+
+    var galleryImgLink = new Array(
+        "images/gallery/gallery-01.jpg",
+        "images/gallery/gallery-02.jpg",
+        "images/gallery/gallery-03.jpg",
+        "images/gallery/gallery-04.jpg",
+        "images/gallery/gallery-05.jpg",
+        "images/gallery/gallery-06.jpg",
+        "images/gallery/gallery-07.jpg",
+        "images/gallery/gallery-08.jpg"
+    );
+
+    var galleryPrint = "";
+
+    for (img in galleryImgLink) {
+        galleryPrint += `<div class="${galleryClass}">
+                            <a href="${galleryImgLink[img]}" class="${galleryImgClass}">
+                                <img src="${galleryImgLink[img]}" alt="gym-workout${img}" class="${ImgFluidClass}">
+                            </a>
+                        </div>`;
+    };
+    gallery.innerHTML = galleryPrint;
+    return ImgFluidClass;
+}
+
+function printWholeFooter() {
+    var footerTextObj = {
+        class: footerBlockClass,
+
+        h2Class: h2Class,
+
+        spanClass: "text-color",
+
+        text1: "To maintain the quality of our services, we encourage all members to adhere to gym guidelines and attend scheduled appointments on time. Your cooperation ensures a great experience for everyone.",
+
+        text2: "Please respect gym rules and arrive on time for your sessions. Together, we create a better fitness environment.",
+    };
+
+    var footerTextPrint = "";
+
+    footerTextPrint += `<div class="${footerTextObj.class}">
+                    <h2 class="${footerTextObj.h2Class}">
+                        Gym<span class="${footerTextObj.spanClass}">Fit</span>
+                    </h2>
+                    <p>${footerTextObj.text1}</p>
+                    <p>${footerTextObj.text2}</p>
+                  </div>`;
+
+
+    //#region FOOTER WORKING TIME
+    var workingTimeObj = {
+        blockClass: "col-lg-3 col-md-6 mb-5 mb-lg-0",
+
+        innerClass: "footer-widget recent-blog",
+
+        h4Class: h4Class,
+
+        link: contact,
+
+        textClass: textWhiteClass,
+
+        workingDays: ["Monday&minus;Friday", "Saturday", "Sundays"],
+
+        pClass: pFooterClass,
+
+        workingTime: ["From 7 AM to 11 PM", "From 10 AM to 8 PM", "Closed"]
+    };
+
+
+    var footerWorkingTimePrint = "";
+
+    footerWorkingTimePrint += `<div class="${workingTimeObj.blockClass}.w-auto">
+                            <div class="${workingTimeObj.innerClass}">
+                                <h4 class="${workingTimeObj.h4Class}">Working Time</h4>`;
+    for (let t in workingTimeObj.workingDays)
+        footerWorkingTimePrint += `<div>
+                                    <a href="${workingTimeObj.link}" class="${workingTimeObj.textClass}">
+                                        ${workingTimeObj.workingDays[t]}:
+                                    </a>
+                                    <p class="${workingTimeObj.pClass}">${workingTimeObj.workingTime[t]}</p>
+                                </div>`;
+
+    footerWorkingTimePrint += `   </div>
+                        </div>`;
+
+    //#endregion
+    //#region FOOTER QUICK LINKS
+    var quickLinksObj = {
+        blockClass: "col-lg-2 col-md-5 mb-5 mb-lg-0",
+
+        innerCLass: "footer-widget",
+
+        h4Class: h4Class,
+
+        ulClass: "list-unstyled footer-menu lh-40 mb-0",
+
+        links: [about, trainer, membership, course, contact, author],
+
+        iconClass: "ti-angle-double-right mr-2",
+
+        linkText: ["About Us", "Trainer", "Membership", "Courses", "Contact Us", "Author"]
+    };
+
+    var quickLinksPrint = "";
+
+    quickLinksPrint += `<div class="${quickLinksObj.blockClass}">
+                    <div class="${quickLinksObj.innerCLass}">
+                        <h4 class="${quickLinksObj.h4Class}">Quick Links</h4>
+                        <ul class="${quickLinksObj.ulClass}">`;
+    for (let i in quickLinksObj.links) {
+        quickLinksPrint += `          <li>
+                                <a href="${quickLinksObj.links[i]}"><i class="${quickLinksObj.iconClass}"></i>${quickLinksObj.linkText[i]}</a>
+                            </li>`;
+    }
+    quickLinksPrint += `      </ul>
+                    </div>
+                 </div>`;
+
+
+    //#endregion
+    //#region CONTACT INFORMATION
+    var contactInformationObj = {
+        blockClass: "col-lg-3 col-md-5",
+
+        innerClass: "footer-widget",
+
+        h4Class: h4Class,
+
+        infoEmail: '<i class="fa-solid fa-envelope"></i> boris.jolovic.249.21&#64;ict.edu.rs',
+
+        infoPhoneNumber: '<i class="fa-solid fa-phone"></i> 060/422-7709<br/>',
+
+        spanClass: textWhiteClass,
+
+        infoAddress: '<i class="fa-solid fa-location-dot"></i> Zdravka Čelara 16, Belgrade'
+    };
+
+    var contactInformationPrint = `<div class="${contactInformationObj.blockClass}">
+                                <div class="${contactInformationObj.innerClass}">
+                                    <h4 class="${contactInformationObj.h4Class}">Contact Information</h4>
+                                    <p>
+                                        ${contactInformationObj.infoEmail}<br/>
+                                        ${contactInformationObj.infoPhoneNumber}<br/>
+                                    </p>
+                                    <span class="${contactInformationObj.spanClass}">
+                                        ${contactInformationObj.infoAddress}
+                                    </span>
+                                </div>
+                            </div>`;
+
+
+    //#endregion
+    //#region COPYRIGHT LINKS
+    var footerLinksObj = {
+        blockClass: "row align-items-center mt-5 px-3 bg-black mx-1",
+
+        divClass: "col-lg-4",
+
+        copyrightText: '<p class="text-white mt-3">Copyright &copy; 2024 Boris Jolović</p>',
+
+        pcInnerBlockClass: "col-lg-6 ml-auto text-right",
+
+        ulClass: "list-inline mb-0 footer-socials",
+
+        liClass: "list-inline-item",
+
+        aLinks: ["https://www.facebook.com/visokaictskola",
+            "https://www.youtube.com/@ict7724",
+            "https://twitter.com/?lang=sr",
+            "#",
+            "#",
+            "#",
+            "robots.txt"
+        ],
+
+        icons: ['<i class="fa-brands fa-facebook"></i>',
+            '<i class="fa-brands fa-youtube"></i>',
+            '<i class="fa-brands fa-x-twitter"></i>',
+            '<i class="fa-regular fa-file-pdf"></i>',
+            '<i class="fa-solid fa-square-rss"></i>',
+            '<i class="fa-solid fa-sitemap"></i>',
+            '<i class="fa-solid fa-robot"></i>'
+        ]
+    };
+
+    var footerLinkPrint = `<div class="${footerLinksObj.blockClass}">
+                        <div class="${footerLinksObj.divClass}">
+                            ${footerLinksObj.copyrightText}
+                        </div>
+                        <div class="${footerLinksObj.pcInnerBlockClass}">
+                            <ul class="${footerLinksObj.ulClass}">`;
+    for (let f in footerLinksObj.aLinks) {
+        footerLinkPrint += `              <li class="${footerLinksObj.liClass}">
+                                    <a href="${footerLinksObj.aLinks[f]}">
+                                        ${footerLinksObj.icons[f]}
+                                    </a>
+                                </li>`;
+    }
+    footerLinkPrint += `          </ul>
+                        </div>
+                    </div>`;
+
+    //#endregion
+    //#region copy all footer blocks
+    var allFooterBlocks = `<div class="container" id="${containerForFooterBlocks}">
+                        <div class="row" id="${footerBlocks}">
+                            ${footerTextPrint}
+                            ${footerWorkingTimePrint}
+                            ${quickLinksPrint}
+                            ${contactInformationPrint}
+                        </div>
+                
+                        <hr class="hr">
+                        
+                        ${footerLinkPrint}
+                    </div>`;
+    var footer = document.querySelector('footer').innerHTML = allFooterBlocks;
+    //#endregion
 }
 
 
 
 
+
+  
+if(pathName == '/index.html'){
+
+
+//#region NAVIGATION
+
+//NAVIGATION LINKS
+
+printNavigationBar();
+
 //#endregion
 
 //#region ROW-BLOCKS
-
 
 var rowInnerBlock = new Array("card p-5 border-0 rounded-top border-bottom position-relative hover-style-1","card p-5 border-0 rounded-top hover-style-1","card p-5 border-0 rounded-top hover-style-1");
 var rowNumbers = new Array("<span class='number'>01</span>","<span class='number'>02</span>","<span class='number'>03</span>");
@@ -215,24 +510,7 @@ osbIcons.forEach((icon, index) => {
 
 //#region GALLERY
 
-var galleryClass ="col-lg-3 col-md-6 col-sm-6";
-
-var galleryImgClass ="popup-gallery";
-
-var ImgFluidClass ="img-fluid";
-
-var galleryImgLink = new Array("images/gallery/gallery-01.jpg","images/gallery/gallery-02.jpg","images/gallery/gallery-03.jpg","images/gallery/gallery-04.jpg","images/gallery/gallery-05.jpg","images/gallery/gallery-06.jpg","images/gallery/gallery-07.jpg","images/gallery/gallery-08.jpg");
-
-var galleryPrint ="";
-
-for(img in galleryImgLink){
-    galleryPrint+=`<div class="${galleryClass}">
-                    <a href="${galleryImgLink[img]}" class="${galleryImgClass}">
-                        <img src="${galleryImgLink[img]}" alt="gym-workout${img}" class="${ImgFluidClass}">
-                    </a>
-                  </div>`
-};
-gallery.innerHTML = galleryPrint;
+var ImgFluidClass = printGallery();
 
 //#endregion
 
@@ -391,302 +669,131 @@ popularCourses.innerHTML = pcPrint;
 
 //#region FOOTER-TEXT
 
-var footerTextObj = {
-
-    class : footerBlockClass,
-
-    h2Class : h2Class,
-
-    spanClass : "text-color",
-
-    text1 : "To maintain the quality of our services, we encourage all members to adhere to gym guidelines and attend scheduled appointments on time. Your cooperation ensures a great experience for everyone.",
-
-    text2 : "Please respect gym rules and arrive on time for your sessions. Together, we create a better fitness environment.",
-
-};
-
-var footerTextPrint ="";
-
-footerTextPrint+=`<div class="${footerTextObj.class}">
-                    <h2 class="${footerTextObj.h2Class}">
-                        Gym<span class="${footerTextObj.spanClass}">Fit</span>
-                    </h2>
-                    <p>${footerTextObj.text1}</p>
-                    <p>${footerTextObj.text2}</p>
-                  </div>`;
+printWholeFooter();
 
 //#endregion
 
-//#region FOOTER WORKING TIME
 
-var workingTimeObj = {
-
-    blockClass : "col-lg-3 col-md-6 mb-5 mb-lg-0",
-
-    innerClass : "footer-widget recent-blog",
-
-    h4Class : h4Class,
-
-    link : contact,
-
-    textClass : textWhiteClass,
-    
-    workingDays : ["Monday&minus;Friday","Saturday","Sundays"],
-
-    pClass : pFooterClass,
-
-    workingTime : ["From 7 AM to 11 PM","From 10 AM to 8 PM","Closed"]
-
-};
-
-
-var footerWorkingTimePrint ="";
-
-footerWorkingTimePrint+=`<div class="${workingTimeObj.blockClass}.w-auto">
-                            <div class="${workingTimeObj.innerClass}">
-                                <h4 class="${workingTimeObj.h4Class}">Working Time</h4>`
-for(let t in workingTimeObj.workingDays)
-footerWorkingTimePrint+=        `<div>
-                                    <a href="${workingTimeObj.link}" class="${workingTimeObj.textClass}">
-                                        ${workingTimeObj.workingDays[t]}:
-                                    </a>
-                                    <p class="${workingTimeObj.pClass}">${workingTimeObj.workingTime[t]}</p>
-                                </div>`
-
-footerWorkingTimePrint+=`   </div>
-                        </div>`
 
 //#endregion
 
-//#region FOOTER QUICK LINKS
 
-var quickLinksObj = {
-
-    blockClass : "col-lg-2 col-md-5 mb-5 mb-lg-0",
-
-    innerCLass : "footer-widget",
-
-    h4Class : h4Class,
-
-    ulClass : "list-unstyled footer-menu lh-40 mb-0",
-
-    links : [about,trainer,membership,course,contact,author],
-
-    iconClass : "ti-angle-double-right mr-2",
-
-    linkText : ["About Us","Trainer","Membership","Courses","Contact Us","Author"]
-
-};
-
-var quickLinksPrint = "";
-
-quickLinksPrint+=`<div class="${quickLinksObj.blockClass}">
-                    <div class="${quickLinksObj.innerCLass}">
-                        <h4 class="${quickLinksObj.h4Class}">Quick Links</h4>
-                        <ul class="${quickLinksObj.ulClass}">`;
-for(let i in quickLinksObj.links){
-quickLinksPrint+=`          <li>
-                                <a href="${quickLinksObj.links[i]}"><i class="${quickLinksObj.iconClass}"></i>${quickLinksObj.linkText[i]}</a>
-                            </li>`;
 }
-quickLinksPrint+=`      </ul>
-                    </div>
-                 </div>`;
-
-
-//#endregion
-
-//#region CONTACT INFORMATION
-
-var contactInformationObj = {
-
-    blockClass : "col-lg-3 col-md-5",
-
-    innerClass : "footer-widget",
-
-    h4Class : h4Class,
-
-    infoEmail : '<i class="fa-solid fa-envelope"></i> boris.jolovic.249.21&#64;ict.edu.rs',
-
-    infoPhoneNumber : '<i class="fa-solid fa-phone"></i> 060/422-7709<br/>',
-
-    spanClass : textWhiteClass,
-
-    infoAddress : '<i class="fa-solid fa-location-dot"></i> Zdravka Čelara 16, Belgrade'
-
-};
-
-var contactInformationPrint=`<div class="${contactInformationObj.blockClass}">
-                                <div class="${contactInformationObj.innerClass}">
-                                    <h4 class="${contactInformationObj.h4Class}">Contact Information</h4>
-                                    <p>
-                                        ${contactInformationObj.infoEmail}<br/>
-                                        ${contactInformationObj.infoPhoneNumber}<br/>
-                                    </p>
-                                    <span class="${contactInformationObj.spanClass}">
-                                        ${contactInformationObj.infoAddress}
-                                    </span>
-                                </div>
-                            </div>`;
-
-             
-//#endregion
-
-//#region COPYRIGHT LINKS
-
-var footerLinksObj = {
-
-    blockClass : "row align-items-center mt-5 px-3 bg-black mx-1",
-
-    divClass : "col-lg-4",
-
-    copyrightText : '<p class="text-white mt-3">Copyright &copy; 2024 Boris Jolović</p>',
-
-    pcInnerBlockClass : "col-lg-6 ml-auto text-right",
-
-    ulClass : "list-inline mb-0 footer-socials",
-
-    liClass : "list-inline-item",
-
-    aLinks :[ "https://www.facebook.com/visokaictskola",
-              "https://www.youtube.com/@ict7724",
-              "https://twitter.com/?lang=sr",
-              "#",
-              "#",
-              "#",
-              "robots.txt"
-            ],
-
-    icons : ['<i class="fa-brands fa-facebook"></i>',
-             '<i class="fa-brands fa-youtube"></i>',
-             '<i class="fa-brands fa-x-twitter"></i>',
-             '<i class="fa-regular fa-file-pdf"></i>',
-             '<i class="fa-solid fa-square-rss"></i>',
-             '<i class="fa-solid fa-sitemap"></i>',
-             '<i class="fa-solid fa-robot"></i>'
-            ]
-
-};
-
-var footerLinkPrint =`<div class="${footerLinksObj.blockClass}">
-                        <div class="${footerLinksObj.divClass}">
-                            ${footerLinksObj.copyrightText}
-                        </div>
-                        <div class="${footerLinksObj.pcInnerBlockClass}">
-                            <ul class="${footerLinksObj.ulClass}">`;
-for(let f in footerLinksObj.aLinks){
-footerLinkPrint+=`              <li class="${footerLinksObj.liClass}">
-                                    <a href="${footerLinksObj.aLinks[f]}">
-                                        ${footerLinksObj.icons[f]}
-                                    </a>
-                                </li>`;
-}
-footerLinkPrint+=`          </ul>
-                        </div>
-                    </div>`;
-
-//#endregion
-
-//#region copy all footer blocks
-var allFooterBlocks=`<div class="container" id="${containerForFooterBlocks}">
-                        <div class="row" id="${footerBlocks}">
-                            ${footerTextPrint}
-                            ${footerWorkingTimePrint}
-                            ${quickLinksPrint}
-                            ${contactInformationPrint}
-                        </div>
-                
-                        <hr class="hr">
-                        
-                        ${footerLinkPrint}
-                    </div>`
-var footer = document.querySelector('footer').innerHTML = allFooterBlocks;
-
-function printFooter(){
-    return footer;
-}
-//#endregion
-
-
-
-//#endregion
-
-
-
-
-
-
 
 
 
 if(pathName == '/about.html'){
 
-    //#region about.html
+//#region SECTION NAVIGATION FOR OTHER PAGES
+printNavigationBar();
 
-//#region NAVIGATION FOR OTHER PAGES
+printSectionNavigationForOtherPages();
 
-function returnPageName(input) {
-    
-    let name = input.replace("/", "").split(".");
-    return name[0];
-};
+//#endregion
 
-function findPageName(pathName) {
-    let pageLink = ["about", "trainer", "course","membership", "contact"];
-    let currentPage = returnPageName(pathName);
+//#region WHY CHOOSE US
 
-    for (let i in pageLink) {
-        if (currentPage === pageLink[i]) {
-            return pageLink[i];
-        }
-    }
-};
-var currentPage = findPageName(pathName);
-console.log(pathName);
+let whyChooseUSObj = {
 
-let navigationForOtherPages ={
+    divCLass : "col-lg-4 col-md-6",
 
-    sectionClass : sectionClass,
-
-    divClass : "container",
-
-    innerDivClass : "row",
-
-    ulDivClass : "col-lg-12 text-center",
-
-    ulClass : "list-inline mb-0",
-
-    liTag : 
+    cardClass : 
     [
-            `<li class="list-inline-item"><a href="${index}" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a></li>`,
-
-            `<li class="list-inline-item"><span class="text-white">|</span></li>`,
-
-            `<li class="list-inline-item"><a href="#" class="text-color text-uppercase text-sm letter-spacing">${currentPage}</a></li>`
+        "card p-4 text-center mb-4 border-0 bg-black-50 rounded-0 ",
+        "card p-4 text-center border-0 mb-4 rounded-0",
+        "card p-4 text-center border-0 mb-4 rounded-0 bg-black-50",
+        "card p-4 text-center border-0 rounded-0 ",
+        "card p-4 text-center border-0 rounded-0 bg-black-50",
+        "card p-4 text-center border-0 rounded-0"
     ],
 
-    h1Class : "text-lg text-white mt-2",
+    iconClass : 
+    [
+        "icofont-dumbbells text-lg text-color",
+        "icofont-muscle text-lg text-color",
+        "icofont-fruits text-lg text-color",
+        "icofont-thumbs-up text-lg text-color",
+        "icofont-ui-fire-wall text-lg text-color",
+        "icofont-bill-alt text-lg text-color"
+    ],
 
-    h1 : "What we are"
+    h3Class : 
+    [
+        "mt-3 text-white",
+        "mt-3",
+        "mt-3 text-white",
+        "mt-3",
+        "mt-3 text-white",
+        "mt-3"
+    ],
+
+    h3Text : 
+    [
+        "Modern Equipment",
+        "Proffesional Trainer",
+        "Healthy Diet Plan",
+        "24/7 Helping People",
+        "Unique to Your Needs",
+        "Online payment"
+    ],
+
+    pClass : 
+    [
+        "mt-3 mb-4 text-white",
+        "mt-3 mb-4",
+        "mt-3 mb-4 text-white",
+        "mt-3 mb-4",
+        "mt-3 mb-4 text-white",
+        "mt-3 mb-4"
+    ],
+
+    pText : 
+    [
+        "Experience the latest state-of-the-art machines for effective and safe workouts.",
+        "Get expert guidance from certified trainers dedicated to helping you achieve your fitness goals.",
+        "Enjoy personalized meal plans designed to complement your training and boost your health.",
+        "We're here for you around the clock to support your fitness journey anytime.",
+        "Tailored programs designed to match your individual fitness aspirations and lifestyle.",
+        "Convenient and secure payment options to make your fitness experience hassle-free."
+    ]
 
 };
 
-var printNavForOtherPages=`<div class="${navigationForOtherPages.divClass}">
-                            <div class="${navigationForOtherPages.innerDivClass}">
-                                <div class="${navigationForOtherPages.ulDivClass}">
-                                    <ul class="${navigationForOtherPages.ulClass}">`;
-for(let n in navigationForOtherPages.aText){  
-printNavForOtherPages+=`                ${navigationForOtherPages.liTag[n]}`;
-}
-printNavForOtherPages+=`            </ul>
-                                        <h1 class="${navigationForOtherPages.h1Class}">
-                                            ${navigationForOtherPages.h1}
-                                        </h1>
-                                </div>
-                            </div>
-                        </div>`;
 
-console.log(printNavForOtherPages);
+whyChooseUSObj.cardClass.forEach((cardClass, index) => {
+    
+    let cardDiv = createElementWithClass("div", whyChooseUSObj.divCLass);
+
+    let innerCardDiv = createElementWithClass("div", cardClass);
+
+    let iconElement = createElementWithClass("i", whyChooseUSObj.iconClass[index]);
+    appendChildToParent(innerCardDiv, iconElement);
+
+    let h3Element = createElementWithClass("h3", whyChooseUSObj.h3Class[index]);
+    h3Element.textContent = whyChooseUSObj.h3Text[index];
+    appendChildToParent(innerCardDiv, h3Element);
+
+    let pElement = createElementWithClass("p", whyChooseUSObj.pClass[index]);
+    pElement.textContent = whyChooseUSObj.pText[index];
+    appendChildToParent(innerCardDiv, pElement);
+
+    appendChildToParent(cardDiv, innerCardDiv);
+
+    appendChildToParent(whyChooseUsID, cardDiv);
+});
+
+
+//#endregion
+
+//#region GALLERY
+
+printGallery();
+
+//#endregion
+
+//#region FOOTER
+
+printWholeFooter();
 
 //#endregion
 
@@ -694,10 +801,6 @@ console.log(printNavForOtherPages);
 
 
 
-
-//#endregion
-
 };
-
 
 
