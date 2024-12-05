@@ -733,13 +733,6 @@ ul.dropdown-menu li {
   padding-left: 10px;
 }
 
-.list-inline-item a {
-  transition: font-size 0.3s ease-in-out;
-}
-.list-inline-item a:hover {
-  font-size: 1.7rem;
-}
-
 .fa-facebook:hover{
   color:  #316FF6;
 }
@@ -766,6 +759,10 @@ ul.dropdown-menu li {
 
 .fa-robot:hover{
   color: #959595;
+}
+
+.fa-linkedin:hover{
+  color: #0077B5;
 }
 
 .hr{

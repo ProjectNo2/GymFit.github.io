@@ -26,10 +26,25 @@ const containerForFooterBlocks = document.querySelector("#containerFooter");
 const sectionClass = "page-title bg-2";
 const sectionNavId = document.querySelector("#navigationHeader");
 const whyChooseUsID = document.querySelector("#whyChooseUS");
+const ourTrainerId = document.querySelector("#ourTrainer");
+const colMd6Class = "col-md-6";
+const h3Class = "card-title text-color";
+const h6Class = "card-subtitle pb-4 letter-spacing";
+const iClassInline = "list-inline-item";
+const divInnerCardClass = "card-body team-wrap pl-4";
+const allCoursesID = document.querySelector("#allCourses");
+const divCardRounded  = document.querySelector(".card rounded-0 p-0 mb-5");
+const packagePricingID = document.querySelector("#packagePricing");
+const packagePricingHeader = document.querySelector("#packagePricingHeader");
+const packagePricingContainerId = document.querySelector("#packagePricingContainer");
+const RowJustifyCC = "row justify-content-center";
+
 //#endregion
 
 let pathNameArray = window.location.pathname.split('/')
 let pathName = '/'+pathNameArray[pathNameArray.length-1]
+
+//#region FUNCTION CREATE ELEMENTS
 
 function createElementWithClass(tag, className) {
     let element = document.createElement(tag);
@@ -41,6 +56,7 @@ function appendChildToParent(parent, child) {
     parent.appendChild(child);
 }
 
+//#endregion
 
 
 
@@ -113,14 +129,19 @@ function printNavigationBar() {
 }
 
 function printSectionNavigationForOtherPages() {
+    
+    let pageLink = ["about", "trainer", "course", "membership", "contact"];
+    
     function returnPageName(input) {
 
         let name = input.replace("/", "").split(".");
         return name[0];
     };
 
+
+    
     function findPageName(pathName) {
-        let pageLink = ["about", "trainer", "course", "membership", "contact"];
+        
         let currentPage = returnPageName(pathName);
 
         for (let i in pageLink) {
@@ -130,6 +151,14 @@ function printSectionNavigationForOtherPages() {
         }
     };
 
+    // let navDescriptionText = new Array
+    // (
+    //     "What we are",
+    //     "Who are trainers",
+    //     "Our courses",
+    //     "Become partner",
+    //     "Book Appointments"
+    // );
 
 
 
@@ -349,7 +378,9 @@ function printWholeFooter() {
 
         liClass: "list-inline-item",
 
-        aLinks: ["https://www.facebook.com/visokaictskola",
+        aLinks: 
+        [
+            "https://www.facebook.com/visokaictskola",
             "https://www.youtube.com/@ict7724",
             "https://twitter.com/?lang=sr",
             "#",
@@ -402,7 +433,6 @@ function printWholeFooter() {
     var footer = document.querySelector('footer').innerHTML = allFooterBlocks;
     //#endregion
 }
-
 
 
 
@@ -680,8 +710,6 @@ printWholeFooter();
 
 }
 
-
-
 if(pathName == '/about.html'){
 
 //#region SECTION NAVIGATION FOR OTHER PAGES
@@ -797,10 +825,316 @@ printWholeFooter();
 
 //#endregion
 
+};
+
+if(pathName == '/trainer.html'){
+
+//#region NAVIGATION
+
+printNavigationBar();
+printSectionNavigationForOtherPages();
+
+//#endregion
+ 
+//#region OUR TRAINER
+
+let ourTrainerObj = {
+
+    outerDivClass : colMd6Class,
+
+    divClass : "card border-0 mb-1  bg-transparent rounded-0 mb-4",
+
+    InnerDivClass : "row no-gutters align-items-center",
+
+    imgDiv : colMd6Class,
+
+    imgSrc : 
+    [
+        "images/team/team-1.jpg",
+        "images/team/team-2.jpg",
+        "images/team/team-3.jpg",
+        "images/team/team-4.jpg"
+    ],
+
+    imgAlt : "team-trainer",
+
+    imgClass : "img-fluid w-100",
+    
+    // col-md-6
+
+    divInnerCardClass : divInnerCardClass,
+
+    h3Class : h3Class,
+
+    h3Text : ["John Carter","David Hamilton","Thomas Vel", "Michael Reeves"],
+
+    h6Class : h6Class,
+
+    h6Text : ["Weight Lifting","Body Building","Fitness","Cycling"],
+
+    pClass : "mb-5",
+
+    pText : 
+    [
+        `<b><i>"I’m dedicated to helping others build strength and lead healthier lives."</i></b><br/> John's sessions focus on improving muscle and bone health.`,
+
+        `<b><i>"Helping people achieve their dream physique is my passion."</i></b><br/> David’s training boosts confidence and overall fitness.`,
+
+        `<b><i>"I love inspiring others to stay active and healthy."</i></b><br/> Thomas focuses on endurance and full-body conditioning.`,
+
+        `<b><i>"Fitness should be fun and stress-relieving."</i></b><br/> Michael’s cycling classes improve heart health and stamina.`
+    ],
+
+    ulClass : "list-inline ",
+
+    iClass : iClassInline,
+
+    aHref : 
+    [
+        "https://www.facebook.com/visokaictskola",
+        "https://twitter.com/?lang=sr",
+        "https://rs.linkedin.com"
+    ],
+
+    icons :
+     [
+        "fa-brands fa-facebook",
+        "fa-brands fa-x-twitter",
+        "fa-brands fa-linkedin"
+    ]
+
+};
+
+let ourTrainerPrint ="";
+
+for(let i in ourTrainerObj.imgSrc){
+ourTrainerPrint +=`<div class="${ourTrainerObj.outerDivClass}">
+                    <div class="${ourTrainerObj.divClass}">
+                        <div class="${ourTrainerObj.InnerDivClass}">
+                            <div class="${ourTrainerObj.imgDiv}">
+                                <img src="${ourTrainerObj.imgSrc[i]}"
+                                    alt="${ourTrainerObj.imgAlt}${i}" 
+                                    class="${ourTrainerObj.imgClass}">   
+                                </div>
+                                <div class="${ourTrainerObj.imgDiv}">
+                                <div class="${ourTrainerObj.divInnerCardClass}">
+                                    <h3 class="${ourTrainerObj.h3Class}">${ourTrainerObj.h3Text[i]}</h3>
+                                    <h6 class="${ourTrainerObj.h6Class}">${ourTrainerObj.h6Text[i]}</h6>
+                                    <p class="${ourTrainerObj.pClass}">${ourTrainerObj.pText[i]}</p>
+                                    <ul class="${ourTrainerObj.ulClass}">
+                                        ${ourTrainerObj.aHref.map((href, index) => 
+                                            `<li class="${ourTrainerObj.iClass}">
+                                                <a href="${href}">
+                                                    <i class="${ourTrainerObj.icons[index]}"></i>
+                                                </a>
+                                            </li>`
+                                        ).join("")}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+};
+
+ourTrainerId.innerHTML = ourTrainerPrint;
+
+//#endregion
+
+//#region FOOTER
+
+printWholeFooter();
+
+//#endregion
+
+}
+
+if(pathName == '/course.html'){
+
+//#region NAVIGATON
+
+printNavigationBar();
+printSectionNavigationForOtherPages();
 
 
+
+
+//#endregion
+
+//#region ALL POPULAR COURSES
+
+let allPopularCoursesObj = {
+
+    id : allCoursesID,
+
+    outerDiv : rowBlocksClass,
+
+    divCard : divCardRounded,
+
+    imgSrc : 
+    [
+        "images/gallery/course-1.jpg",
+        "images/gallery/course-2.jpg",
+        "images/gallery/course-3.jpg",
+        "images/gallery/course-4.jpg",
+        "images/gallery/course-5.jpg",
+        "images/gallery/course-6.jpg"
+    ],
+
+    alt : "trainingCourse",
+
+    imgClass : "img-fluid",
+
+    divInnerCard : "card-body",
+
+    aHref : contact,
+
+    h4Class : "mt-3 mb-0",
+
+    h4Text : 
+    [
+        "Functional Fitness Training",
+
+        "Strength and Conditioning",
+
+        "Core Strengthening",
+        
+        "Cardio and Endurance",
+        
+        "Yoga",
+
+        "Body Building"
+    ],
+
+    pClass : " mb-2",
+
+    job : ["Mentor","Trainer","Instructor","Coach","Nutritionist","Physiotherapist"],
+
+    name :["John Carter","Emily Dawson","Michael Reeves","Sarah Blake","David Hamilton","Thomas Vel"],
+
+    ulClass : "list-inline",
+
+    ulLiClass : "list-inline-item",
+
+    iClass : "ti-time mr-2 text-color",
+
+    iTextDays :
+    [
+        "Monday-Tuesday",
+        "Wednesday-Thursday:",
+        "Friday-Saturday",
+        "Monday-Tuesday",
+        "Wednesday-Thursday",
+        "Friday-Saturday"
+    ],
+
+    liClassHours : "list-inline-item text-black",
+
+    hours : ["7am-12pm ","6am-11am ","8am-1pm ","3pm-8pm","2pm-7pm ","4pm-9pm "]
+    
+};
+
+let allCoursesPrint ="";
+
+for(let c in allPopularCoursesObj.h4Text){
+
+allCoursesPrint+=`<div class="${allPopularCoursesObj.outerDiv}">
+                    <div class="${allPopularCoursesObj.divCard}">
+                        <img src="${allPopularCoursesObj.imgSrc[c]}" alt="${allPopularCoursesObj.alt}"
+                             class="${allPopularCoursesObj.imgClass}">
+                             
+                             <div class="${allPopularCoursesObj.divInnerCard}">
+                                <a href="${allPopularCoursesObj.aHref}">
+                                    <h4 class="${allPopularCoursesObj.h4Class}">
+                                        ${allPopularCoursesObj.h4Text[c]}
+                                    </h4>
+                                </a>
+                                <p class="${allPopularCoursesObj.pClass}">
+                                    ${allPopularCoursesObj.job[c]}: ${allPopularCoursesObj.name[c]}
+                                </p>
+                            <ul class="${allPopularCoursesObj.ulClass}">
+                                <li class="${allPopularCoursesObj.ulLiClass}">
+                                    <i class="${allPopularCoursesObj.iClass}"></i>
+                                    ${allPopularCoursesObj.iTextDays[c]} :
+                                </li>
+                                <li class="${allPopularCoursesObj.liClassHours}">
+                                    <strong>${allPopularCoursesObj.hours[c]}</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>`
+};
+
+allCoursesID.innerHTML = allCoursesPrint;
+
+
+
+
+//#endregion
+
+//#region FOOTER
+
+printWholeFooter();
+
+//#endregion
+
+}
+
+if(pathName == '/membership.html'){
+
+//#region NAVIGATION
+
+printNavigationBar();
+printSectionNavigationForOtherPages();
+
+//#endregion
+
+//#region PACKAGE PRICING 
+
+let packagePricingHeaderObj = {
+
+    divClassContentCenter : RowJustifyCC,
+
+    divClassTextCenter : "col-lg-8 text-center",
+
+    divClassSectionTitle : "section-title",
+
+    divClassDivider : "divider mb-3",
+
+    h2Text : "Package Pricing"
+  
+};
+
+let PPHPrint = "";
+
+PPHPrint+=`<div class="${packagePricingHeaderObj.divClassContentCenter}">
+                <div class="${packagePricingHeaderObj.divClassTextCenter}">
+                    <div class="${packagePricingHeaderObj.divClassSectionTitle}">
+                        <div class="${packagePricingHeaderObj.divClassDivider}"></div>
+                        <h2>${packagePricingHeaderObj.h2Text}</h2>
+                    </div>
+                </div>
+            </div>`
+
+console.log(PPHPrint);
+
+
+
+let PPBlocksObj = {
 
 
 };
 
+
+
+
+
+
+
+
+//#endregion
+
+
+}
 
