@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -34,52 +35,15 @@
 
 <!-- Header Start -->
 <nav class="navbar navbar-expand-lg navigation fixed-top" id="navbar">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="index.html">
-			<h2 class="text-white text-capitalize"></i>Gym<span class="text-color">Fit</span></h2>
-		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsid"
-			aria-controls="navbarsid" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="ti-view-list"></span>
-		</button>
-		<div class="collapse text-center navbar-collapse" id="navbarsid">
-			<ul class="navbar-nav mx-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">Services</a>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="about.html">About</a></li>
-						<li><a class="dropdown-item" href="trainer.html">Trainer</a></li>
-						<li><a class="dropdown-item" href="course.html">Courses</a></li>
-					</ul>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="memebership.html">Memebership</a></li>
-				<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-			</ul>
-		</div>
-	</div>
+
 </nav>
 
 
 <!-- Header Close -->
 
 <div class="main-wrapper ">
-<section class="page-title bg-2">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item"><a href="index.html" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a></li>
-            <li class="list-inline-item"><span class="text-white">|</span></li>
-            <li class="list-inline-item"><a href="#" class="text-color text-uppercase text-sm letter-spacing">contact</a></li>
-          </ul>
-           <h1 class="text-lg text-white mt-2">Contact Us</h1>
-      </div>
-    </div>
-  </div>
+<section class="page-title bg-2" id="navigationHeader">
+
 </section>
 
 
@@ -91,142 +55,105 @@
         <div class="section-title">
           <div class="divider mb-3"></div>
           <h2>Contact Us</h2>
-          <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. In error reprehenderit
-            quam enim obcaecati, repudiandae officia a cumque nemo provident!</p>
+          <p class="mt-3">Fill out the form to get in touch or sign up for full access to our courses. We’re here to answer your questions and provide more information.</p>
         </div>
       </div>
     </div>
 
     <div class="row justify-content-center pb-5">
       <div class="col-lg-9 text-center">
-        <form id="contact-form">
+        <form id="contact-form" id="form">
           <div class="form-row">
+            
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
-                <input name="user_name" type="text" class="form-control" placeholder="Your Name">
+                <label for="name">Name</label>
+                <input name="name" type="text" class="form-control" placeholder="for example: Smith" id="name">
+                    <p class="message">
+                      
+                    </p>
               </div>
             </div>
+            
+
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
-                <input name="user_email" type="text" class="form-control" placeholder="Email Address">
+                <label for="lastName">Last Name</label>
+                <input name="lastName" type="text" class="form-control" placeholder="for example: Jackson" id="lastName">
+                  <p class="message">
+                      
+                  </p>
               </div>
             </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="ddlState">State</label> <br/>
+                  <select id="ddlState">
+
+                  </select>
+                  <p class="message">
+                    
+                  </p>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="ddlCity">City</label> <br/>
+                  <select id="ddlCity">
+                    
+                  </select>
+                  <p class="message">
+                      
+                  </p>
+              </div>
+
+            </div>
+            <div class="d-flex flex-column gap-2">
+                <div class="d-flex align-items-center">
+                    <input type="radio" name="gender" value="Male" class="me-2" />
+                    <p class="mb-0">Male</p>
+                    
+                </div>
+                <div class="d-flex align-items-center">
+                    <input type="radio" name="gender" value="Female" class="me-2" />
+                    <p class="mb-0">Female</p> 
+                    
+                </div>
+                <p class="message"></p>
+
+                <div class="d-flex align-items-center mt-3">
+                  <input type="checkbox" class="form-check-input" id="cb" name="cb"/>
+                  
+                  <label for="cb" class="mb-0 me-2">I agree to the terms and conditions</label>
+                  <p class="message"></p>
+              </div>
+            </div>
+
+
+
 
             <div class="col-lg-12 col-md-12 col-sm-12">
-              <div class="form-group-2">
-                <textarea name="user_message" class="form-control" rows="8" placeholder="Your Message"></textarea>
-              </div>
-
-              <div class="text-center">
-                <button class="btn btn-main mt-3 " type="submit">Send Message</button>
+              <div class="text-center" id="submitDiv">
+                <button class="btn btn-main mt-3 " id="submit" type="submit" >Register</button>
               </div>
             </div>
+
           </div>
-          <div class="error" id="error">Sorry Msg dose not sent</div>
-          <div class="success" id="success">Message Sent</div>
         </form>
       </div>
     </div>
   </div>
 
-  <div class="google-map position-relative mt-5">
-    <div class="map" id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"
-      data-marker="images/marker.png"></div>
-  </div>
-
-  <div class="container mt--170">
-    <div class="row">
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-        <div class="card rounded-0 border-0 shadow-sm text-center py-5 px-4 contact-info">
-          <i class="ti-mobile mb-3 text-lg text-color"></i>
-          <span>Call us</span>
-          <p class="lead text-black mb-0 mt-3">+23 45 67890</p>
-          <p class="lead">9:00 am - 17:00 pm</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-        <div class="card rounded-0 border-0 shadow-sm text-center py-5 px-4 contact-info">
-          <i class="ti-email mb-3 text-lg text-color"></i>
-          <span>Email at</span>
-          <p class="lead text-black mt-3 mb-0">support@themefisher.com</p>
-          <p class="lead text-black ">support@gymfit.com</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-        <div class="card rounded-0 border-0 shadow-sm text-center py-5 px-4 contact-info">
-          <i class="ti-home mb-3 text-lg text-color"></i>
-          <span>Location</span>
-          <p class="lead text-black mt-3">Fitness Center Bedford Heights,North London, USA</p>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- footer Start -->
 <footer class="footer bg-black-50">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-				<h2 class="text-white mb-4">GymFit</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus illo ad quo sunt maiores, sint nostrum omnis eaque cumque dolorum.</p>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-			</div>
-			
-
-			<div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-				<div class="footer-widget recent-blog">
-					<h4 class="mb-4 text-white letter-spacing text-uppercase">Recents Posts</h4>
-					<div>
-						<a href="blog-single.html"class="text-white">Claritas est etiam processus dynamicus</a>
-						<p class="text-sm mt-2 text-white-50">30 february 2019</p>
-					</div>
-					<div class="mt-4">
-						<a href="blog-single.html"class="text-white">Claritas est etiam processus dynamicus</a>
-						<p class="text-sm mt-2 text-white-50">30 february 2019</p>
-					</div>
-
-				</div>
-			</div>
-			<div class="col-lg-2 col-md-5 mb-5 mb-lg-0">
-				<div class="footer-widget">
-					<h4 class="mb-4 text-white letter-spacing text-uppercase">Quick Links</h4>
-					<ul class="list-unstyled footer-menu lh-40 mb-0">
-						<li><a href="about.html"><i class="ti-angle-double-right mr-2"></i>About Us</a></li>
-						<li><a href="trainer.html"><i class="ti-angle-double-right mr-2"></i>Trainer</a></li>
-						<li><a href="pricing.html"><i class="ti-angle-double-right mr-2"></i>Membership</a></li>
-						<li><a href="course.html"><i class="ti-angle-double-right mr-2"></i>Courses</a></li>
-						<li><a href="contact.html"><i class="ti-angle-double-right mr-2"></i>Contact us</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-5">
-				<div class="footer-widget">
-					<h4 class="mb-4 text-white letter-spacing text-uppercase">Home location</h4>
-					<p>Washington 6036 Richmond
-					hwy., Alexandria, VA USA 22303 </p>
-					<span class="text-white">+1 (409) 987–5874</span>
-					<span class="text-white">info@demolink.org</span>
-				</div>
-			</div>
-		</div>
-
-		<div class="row align-items-center mt-5 px-3 bg-black mx-1">
-			<div class="col-lg-4">
-				<p class="text-white mt-3">Gymfit © 2019 , Theme By <a href="https://themefisher.com/" class="text-color">Themefisher.com</a></p>
-			</div>
-			<div class="col-lg-6 ml-auto text-right">
-				<ul class="list-inline mb-0 footer-socials">
-					<li class="list-inline-item"><a href="https://www.facebook.com/themefisher"><i class="ti-facebook"></i></a></li>
-					<li class="list-inline-item"><a href="https://twitter.com/themefisher"><i class="ti-twitter"></i></a></li>
-					<li class="list-inline-item"><a href="https://github.com/themefisher/"><i class="ti-github"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
 </footer>
 </div>
+
 <!-- Bootstrap 4.3.1 -->
 <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="js/main.js" type="text/javascript"></script>

@@ -8,22 +8,16 @@ const course = "course.html";
 const membership = "membership.html";
 const contact = "contact.html";
 const author = "author.html";
-const navUL = document.querySelector(".navbar-nav");
-const navigationTag = document.querySelector("nav");
 const h2Class = "text-white text-capitalize";
 const rowH = document.querySelector("#rowH");
 const rowBlocksClass = "col-lg-4 col-md-6";
 const gallery = document.querySelector("#gallery");
 const container = document.querySelector("#containerBlocks");
 const popularCourses = document.querySelector("#Popular-Courses");
-const footerClass = "footer bg-black-50";
 const footerBlocks = document.querySelector("#footer-blocks");
 const footerBlockClass = "col-lg-4 col-md-6 mb-5 mb-lg-0";
 const textWhiteClass = "text-white";
-const pFooterClass = "text-sm mt-2 text-white-50";
 const h4Class = "mb-4 text-white letter-spacing text-uppercase";
-const containerForFooterBlocks = document.querySelector("#containerFooter");
-const sectionClass = "page-title bg-2";
 const sectionNavId = document.querySelector("#navigationHeader");
 const whyChooseUsID = document.querySelector("#whyChooseUS");
 const ourTrainerId = document.querySelector("#ourTrainer");
@@ -38,11 +32,24 @@ const packagePricingID = document.querySelector("#packagePricing");
 const packagePricingHeader = document.querySelector("#packagePricingHeader");
 const packagePricingContainerId = document.querySelector("#packagePricingContainer");
 const RowJustifyCC = "row justify-content-center";
-
+const packagePricingContainerIdColor = document.querySelector("#packagePricingHeaderColor");
+const newMemberDiscountId = document.querySelector("#newMemberDiscount");
+const PPBlocksColor = document.querySelector("#PPBlocks");
+const formDDLState = document.querySelector("#ddlState");
+const formDDLCity = document.querySelector("#ddlCity");
+const formName = document.querySelector("#name");
+const formLastName = document.querySelector("#lastName");
+const formRadioButton = document.getElementsByName("gender");
+const formCB = document.querySelector("#cb");
+const formSubmit = document.querySelector("#submit");
 //#endregion
 
 let pathNameArray = window.location.pathname.split('/')
 let pathName = '/'+pathNameArray[pathNameArray.length-1]
+if(pathName == '/'){
+    pathName = "/"+index;
+};
+
 
 //#region FUNCTION CREATE ELEMENTS
 
@@ -58,8 +65,7 @@ function appendChildToParent(parent, child) {
 
 //#endregion
 
-
-
+//#region GLOBAL FUNCTIONS
 
 function printNavigationBar() {
     var navigationLinks = {
@@ -125,19 +131,26 @@ function printNavigationBar() {
                     </div>
                 </div>`;
 
-    navigationTag.innerHTML = navigation;
+                document.querySelector("nav").innerHTML = navigation;
 }
 
 function printSectionNavigationForOtherPages() {
     
     let pageLink = ["about", "trainer", "course", "membership", "contact"];
+    let navDescriptionText = new Array
+    (
+        "What we are",
+        "Who are trainers",
+        "Our courses",
+        "Become partner",
+        "Book Appointments"
+    );
     
     function returnPageName(input) {
 
         let name = input.replace("/", "").split(".");
         return name[0];
     };
-
 
     
     function findPageName(pathName) {
@@ -151,21 +164,25 @@ function printSectionNavigationForOtherPages() {
         }
     };
 
-    // let navDescriptionText = new Array
-    // (
-    //     "What we are",
-    //     "Who are trainers",
-    //     "Our courses",
-    //     "Become partner",
-    //     "Book Appointments"
-    // );
+    function findPageIndex(pathName) {
+        let currentPage = returnPageName(pathName);
+    
+        for (let i in pageLink) {
+            if (currentPage === pageLink[i]) {
+                return parseInt(i);
+            }
+        }
+    };
 
 
 
+
+
+    var indexNumber = findPageIndex(pathName);
     var currentPage = findPageName(pathName);
 
     let navigationForOtherPages = {
-        sectionClass: sectionClass,
+        sectionClass: "page-title bg-2",
 
         divClass: "container",
 
@@ -185,7 +202,7 @@ function printSectionNavigationForOtherPages() {
 
         h1Class: "text-lg text-white mt-2",
 
-        h1: "What we are"
+        h1: ["What we are","Who are trainers","Our courses","Become partner","Book Appointments"]
     };
 
     var printNavForOtherPages = `<div class="${navigationForOtherPages.divClass}">
@@ -197,7 +214,7 @@ function printSectionNavigationForOtherPages() {
     }
     printNavForOtherPages += `            </ul>
                                         <h1 class="${navigationForOtherPages.h1Class}">
-                                            ${navigationForOtherPages.h1}
+                                            ${navigationForOtherPages.h1[indexNumber]}
                                         </h1>
                                 </div>
                             </div>
@@ -275,7 +292,7 @@ function printWholeFooter() {
 
         workingDays: ["Monday&minus;Friday", "Saturday", "Sundays"],
 
-        pClass: pFooterClass,
+        pClass: "text-sm mt-2 text-white-50",
 
         workingTime: ["From 7 AM to 11 PM", "From 10 AM to 8 PM", "Closed"]
     };
@@ -418,7 +435,7 @@ function printWholeFooter() {
 
     //#endregion
     //#region copy all footer blocks
-    var allFooterBlocks = `<div class="container" id="${containerForFooterBlocks}">
+    var allFooterBlocks = `<div class="container" id="containerFooter">
                         <div class="row" id="${footerBlocks}">
                             ${footerTextPrint}
                             ${footerWorkingTimePrint}
@@ -433,11 +450,9 @@ function printWholeFooter() {
     var footer = document.querySelector('footer').innerHTML = allFooterBlocks;
     //#endregion
 }
-
-
-
-
   
+//#endregion
+
 if(pathName == '/index.html'){
 
 
@@ -1106,9 +1121,10 @@ let packagePricingHeaderObj = {
   
 };
 
-let PPHPrint = "";
 
-PPHPrint+=`<div class="${packagePricingHeaderObj.divClassContentCenter}">
+
+let PPHPHeaderrint = `<div class="container" id="packagePricingContainer">`;
+PPHPHeaderrint+=`<div class="${packagePricingHeaderObj.divClassContentCenter}">
                 <div class="${packagePricingHeaderObj.divClassTextCenter}">
                     <div class="${packagePricingHeaderObj.divClassSectionTitle}">
                         <div class="${packagePricingHeaderObj.divClassDivider}"></div>
@@ -1117,14 +1133,283 @@ PPHPrint+=`<div class="${packagePricingHeaderObj.divClassContentCenter}">
                 </div>
             </div>`
 
-console.log(PPHPrint);
 
 
 
 let PPBlocksObj = {
 
+    divClass : "col-lg-4 col-md-6 mb-4 mb-lg-0",
+
+    divInnerClass : "card rounded-0 px-4 py-5 ",
+
+    h4Class : "card-title text-capitalize font-weight-normal font-secondary",
+
+    h4Text : 
+    [
+        "Standard Pack",
+        `<span class="text-sm bg-dark text-light py-1 px-2 mr-2">Popular</span>"Pro Pack"`,
+        "Gold Pack"
+    ],
+
+    h3Class : "text-lg font-secondary position-relative mt-2",
+
+    supClass : "text-sm position-absolute",
+
+    priceText : ["12","29","39"],
+
+    subText : "per month",
+    
+    divClassCardBody : "card-body mt-2",
+
+    ulClass : "list-unstyled lh-35 mb-4",
+
+    liTags : 
+    [
+        [
+            `<li class="text-black font-weight-bold"><i class="ti-check mr-3 text-color "></i>Training overview</li>
+            <li class="text-black font-weight-bold"><i class="ti-check mr-3 text-color "></i>Foundation Training</li>
+            <li><i class="ti-close mr-3"></i>Begineers Classes</li>
+            <li><i class="ti-close mr-3"></i>Olympic weighlifting</li>
+            <li><i class="ti-close mr-3"></i>Personal Training</li>`
+        ],
+        [
+            `<li class="text-black font-weight-bold"><i class="ti-check mr-3 text-color "></i>Training overview</li>
+            <li class="text-black font-weight-bold"><i class="ti-check mr-3 text-color "></i>Foundation Training</li>
+            <li class="text-black font-weight-bold"><i class="ti-check mr-3 text-color "></i>Begineers Classes</li>
+            <li><i class="ti-close mr-3"></i>Olympic weighlifting</li>
+            <li><i class="ti-close mr-3"></i>Personal Training</li>`
+        ],
+        [
+            `<li class="text-black font-weight-bold"><i class="ti-check mr-3 text-color "></i>Training overview</li>
+            <li class="text-black font-weight-bold"><i class="ti-check mr-3 text-color "></i>Foundation Training</li>
+            <li class="text-black font-weight-bold"><i class="ti-check mr-3 text-color "></i>Begineers Classes</li>
+            <li class="text-black font-weight-bold"><i class="ti-check mr-3 text-color "></i>Olympic weighlifting</li>
+            <li class="text-black font-weight-bold"><i class="ti-check mr-3 text-color "></i>Personal Training</li>`
+        ]
+    ],
+
+    aHref : contact,
+
+    aClass : ["btn btn-solid-border text-black","btn btn-main","btn btn-solid-border text-black"],
+
+    aText : "Buy Now"
+  
+};  
+            
+
+let PPBlocks =`<div class="row justify-content-center" id="packagePricing">`;
+
+for(let b in PPBlocksObj.h4Text){
+
+PPBlocks+=`<div class="${PPBlocksObj.divClass}">
+              <div class="${PPBlocksObj.divInnerClass}">
+                  <h4 class="${PPBlocksObj.h4Class}">${PPBlocksObj.h4Text[b]}</h4>
+                  <h3 class="${PPBlocksObj.h3Class}">
+                    <sup class="${PPBlocksObj.supClass}">$</sup>${PPBlocksObj.priceText[b]}
+                        <sub>${PPBlocksObj.subText}</sub>
+                  </h3>
+                  
+                  <div class="${PPBlocksObj.divClassCardBody}">
+                        <ul class="${PPBlocksObj.ulClass}">
+                            ${PPBlocksObj.liTags[b]}
+                        </ul>
+                        <a href="${PPBlocksObj.aHref}" class="${PPBlocksObj.aClass[b]}">
+                            ${PPBlocksObj.aText}
+                        </a>
+                  </div>
+             </div>
+         </div>`
+};
+
+
+packagePricingHeader. innerHTML += PPHPHeaderrint + PPBlocks;
+
+
+
+//#endregion
+
+//#region PACKAGE PRICING SALE
+
+PPHColor = `<div class="container" id="packagePricingHeaderColor">`;
+PPHColor+=`<div class="${packagePricingHeaderObj.divClassContentCenter}">
+                <div class="${packagePricingHeaderObj.divClassTextCenter}">
+                    <div class="${packagePricingHeaderObj.divClassSectionTitle}">
+                        <div class="${packagePricingHeaderObj.divClassDivider}"></div>
+                        <h2>Discount Action For New Members</h2>
+                    </div>
+                </div>
+            </div>`
+
+
+PPHColor +=`<div class="row justify-content-center" id="PPBlocks">`;   
+
+
+let PPBlocksColorObj = {
+
+    divClass: "col-lg-4 col-md-6 mb-4 mb-lg-0",
+
+    divInnerClass: "card rounded-0 px-4 py-5 bg-4",
+    
+    divClassPositon : "position-relative",
+
+    h4Class: 
+    [
+        "card-title text-white text-capitalize font-weight-normal font-secondary",
+        "card-title text-capitalize font-weight-normal font-secondary text-white",
+        "card-title text-capitalize font-weight-normal font-secondary text-white"
+    ],
+
+    h4Text: [
+        "Standard Pack",
+        `<span class="text-sm bg-primary text-white py-1 px-2 mr-2">Popular</span>`,
+        "Gold Pack"
+    ],
+    h3Class: 
+    [
+        "text-lg text-white font-secondary position-relative  mt-2",
+        "text-lg font-secondary position-relative mt-2 text-white",
+        "text-lg text-white font-secondary position-relative mt-2"
+    ],
+
+    supClass: "text-sm position-absolute",
+
+    priceText: ["12", "29", "39"],
+
+    subText: "per month",
+
+    divClassCardBody: "card-body mt-2",
+
+    ulClass: "list-unstyled lh-35 mb-4",
+
+    liTags: [
+        [
+            `<li class="text-white"><i class="ti-check mr-3 text-color "></i>Training overview</li>
+            <li class="text-white"><i class="ti-check mr-3 text-color "></i>Foundation Training</li>
+            <li class="text-white-50"><i class="ti-close mr-3"></i>Begineers Classes</li>
+            <li class="text-white-50"><i class="ti-close mr-3"></i>Olympic weighlifting</li>
+            <li class="text-white-50"><i class="ti-close mr-3"></i>Personal Training</li>`
+        ],
+        [
+            `<li class="text-white"><i class="ti-check mr-3 text-color "></i>Training overview</li>
+            <li class="text-white"><i class="ti-check mr-3 text-color "></i>Foundation Training</li>
+            <li class="text-white"><i class="ti-check mr-3 text-color "></i>Begineers Classes</li>
+            <li class="text-white-50"><i class="ti-close mr-3"></i>Olympic weighlifting</li>
+            <li class="text-white-50"><i class="ti-close mr-3"></i>Personal Training</li>`
+        ],
+        [
+            `<li class="text-white"><i class="ti-check mr-3 text-color "></i>Training overview</li>
+            <li class="text-white"><i class="ti-check mr-3 text-color "></i>Foundation Training</li>
+            <li class="text-white"><i class="ti-check mr-3 text-color "></i>Begineers Classes</li>
+            <li class="text-white"><i class="ti-check mr-3 text-color "></i>Olympic weighlifting</li>
+            <li class="text-white"><i class="ti-check mr-3 text-color "></i>Personal Training</li>`
+        ]
+    ],
+    aHref: "contact.html",
+
+    aClass: ["btn btn-solid-border text-white", "btn btn-main", "btn btn-solid-border text-white"],
+
+    aText: "Buy Now"
 
 };
+            
+for(let b in PPBlocksColorObj.h4Text){
+
+PPHColor+=`<div class="${PPBlocksColorObj.divClass}">
+                <div class="${PPBlocksColorObj.divInnerClass}">
+                    <div class="${PPBlocksColorObj.divClassPositon}">
+                    <h4 class="${PPBlocksColorObj.h4Class[b]}">${PPBlocksColorObj.h4Text[b]}</h4>
+                    <h3 class="${PPBlocksColorObj.h3Class[b]}">
+                    <sup class="${PPBlocksColorObj.supClass}">$</sup>${PPBlocksColorObj.priceText[b]}
+                        <sub>${PPBlocksColorObj.subText}</sub>
+                    </h3>
+                    
+                    <div class="${PPBlocksColorObj.divClassCardBody}">
+                        <ul class="${PPBlocksColorObj.ulClass}">
+                            ${PPBlocksColorObj.liTags[b]}
+                        </ul>
+                        <a href="${PPBlocksColorObj.aHref}" class="${PPBlocksColorObj.aClass[b]}">
+                            ${PPBlocksColorObj.aText}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>`
+};
+PPHColor+=
+    `</div>
+</div>`;
+
+newMemberDiscountId.innerHTML = PPHColor;
+
+//#endregion
+
+//#region FOOTER
+
+printWholeFooter();
+
+//#endregion
+
+}
+
+if(pathName == '/contact.html'){
+
+//#region NAVIGATION
+
+printNavigationBar();
+printSectionNavigationForOtherPages();
+
+//#endregion
+
+//#region FORM
+
+// DDL Data
+let country = new Array("Select Country","California","Florida","Texas");
+let city = new Array
+(
+    ["Los Angeles", "San Francisco", "San Diego"],
+    ["Miami","Orlando","Tampa"],
+    ["Houston","Dallas","Austin"]
+);
+
+
+let ddlState = "";
+for(let i in country){
+    ddlState+=`<option value="${i}">${country[i]}</option>`
+}
+formDDLState.innerHTML = ddlState;
+
+//
+
+
+
+window.onload = function(){
+
+    formDDLCity.setAttribute("disabled","disabled");
+    formSubmit.setAttribute("disabled","disabled");
+    
+
+};
+
+let nameRegEx = /^[A-Z][a-z]{3,14}$/;
+
+formName.addEventListener("blur",function(){
+
+    let nameValue = formName.value;
+    if(!nameValue.match(nameRegEx)){
+        
+        formName.nextElementSibling.innerHTML = "Name must have between 3 and 15 letters";
+
+       
+    }
+
+});
+
+
+
+
+
+
+
 
 
 
@@ -1135,6 +1420,10 @@ let PPBlocksObj = {
 
 //#endregion
 
+
+//#region FOOTER
+    printWholeFooter();
+//#endregion
 
 }
 

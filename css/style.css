@@ -70,18 +70,19 @@ input[type=email], input[type=password], input[type=text], input[type=tel] {
   outline: none;
   font-size: 14px;
 }
-input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, input[type=tel]:focus {
+/*input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, input[type=tel]:focus {
   box-shadow: none;
   border: 1px solid rgb(245, 99, 75);
 }
+*/
 
 .form-control {
   box-shadow: none;
   border-radius: 0;
 }
 .form-control:focus {
-  box-shadow: none;
-  border: 1px solid rgb(245, 99, 75);
+  box-shadow: 1px 1px 2px 2px;
+  border: 1px solid rgba(39, 158, 255, 0.7);
 }
 
 .btn {
@@ -768,6 +769,81 @@ ul.dropdown-menu li {
 .hr{
   background-color: rgb(245, 99, 75);
 }
+
+#allCourses strong{
+  color: #04AA6D;
+}
+
+/*contact.html / form style*/
+
+
+
+
+label{
+  font-size: 1.4rem;
+  color: #000;
+  float: left;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.red{
+  box-shadow: 1px 1px 2px 2px rgba(255, 0, 0, 0.700);
+}
+
+.green{
+  box-shadow: 1px 1px 2px 2px rgba(0, 255, 0, 0.7);
+}
+
+.message{
+  margin: 12px auto;
+  font-size: 1.2rem;
+  color: red;
+}
+
+#ddlState, #ddlCity{
+  width: 100%;
+  height: 50px;
+}
+
+#lbl{
+  float: left;
+}
+
+.mb-0{
+  margin-left: 15px;
+  font-size: 1.3rem;
+}
+
+#cb{
+  margin-left: 10px;
+}
+
+
+#submitDiv{
+  border-top: 1px solid rgb(245, 99, 75);
+}
+
+.mb-0.me-2{
+  margin-left: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*=== MEDIA QUERY ===*/
 @media (max-width: 400px) {
