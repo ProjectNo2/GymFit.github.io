@@ -62,35 +62,47 @@
 
     <div class="row justify-content-center pb-5">
       <div class="col-lg-9 text-center">
-        <form id="contact-form" id="form">
+        <form  id="form">
           <div class="form-row">
             
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
-                <label for="name">Name</label>
-                <input name="name" type="text" class="form-control" placeholder="for example: Smith" id="name">
+                <label for="name">Name <i class="fa-solid fa-asterisk"></i></label>
+                <input name="name" type="text" class="form-control" list="names" placeholder="e.g. Smith" id="name">
                     <p class="message">
                       
                     </p>
+                    <datalist id="names">
+                      <option value="Dijana"></option>
+                      <option value="Uroš"></option>
+                      <option value="Luka"></option>
+                      <option value="Nenad"></option>
+                  </datalist>
               </div>
             </div>
             
 
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input name="lastName" type="text" class="form-control" placeholder="for example: Jackson" id="lastName">
+                <label for="lastName">Last Name <i class="fa-solid fa-asterisk"></i></label>
+                <input name="lastName" type="text" class="form-control" list="lastNames" placeholder="e.g. Willson" id="lastName">
                   <p class="message">
                       
                   </p>
+                  <datalist id="lastNames">
+                    <option value="Radovanovic"></option>
+                    <option value="Dimitrijević"></option>
+                    <option value="Lukic"></option>
+                    <option value="Kojić"></option>
+                </datalist>
               </div>
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
-                <label for="ddlState">State</label> <br/>
-                  <select id="ddlState">
-
+                <label for="ddlState">State <i class="fa-solid fa-asterisk"></i></label> <br/>
+                  <select id="ddlState" class="form-control">
+                      
                   </select>
                   <p class="message">
                     
@@ -100,9 +112,9 @@
 
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="form-group">
-                <label for="ddlCity">City</label> <br/>
-                  <select id="ddlCity">
-                    
+                <label for="ddlCity">City <i class="fa-solid fa-asterisk"></i></label> <br/>
+                  <select id="ddlCity" class="form-control">
+                    <option value="0">-- Select City --</option>
                   </select>
                   <p class="message">
                       
@@ -113,21 +125,26 @@
             <div class="d-flex flex-column gap-2">
                 <div class="d-flex align-items-center">
                     <input type="radio" name="gender" value="Male" class="me-2" />
-                    <p class="mb-0">Male</p>
+                    <p class="mb-0">Male  <i class="fa-solid fa-asterisk"></i></p>
                     
                 </div>
+                  <p class="message genderMsg">
+                    
+                  </p>
                 <div class="d-flex align-items-center">
                     <input type="radio" name="gender" value="Female" class="me-2" />
-                    <p class="mb-0">Female</p> 
+                    <p class="mb-0">Female  <i class="fa-solid fa-asterisk"></i></p> 
                     
                 </div>
-                <p class="message"></p>
-
+                
                 <div class="d-flex align-items-center mt-3">
                   <input type="checkbox" class="form-check-input" id="cb" name="cb"/>
                   
+
                   <label for="cb" class="mb-0 me-2">I agree to the terms and conditions</label>
-                  <p class="message"></p>
+                  <p class="message">
+
+                  </p>
               </div>
             </div>
 
@@ -137,6 +154,9 @@
             <div class="col-lg-12 col-md-12 col-sm-12">
               <div class="text-center" id="submitDiv">
                 <button class="btn btn-main mt-3 " id="submit" type="submit" >Register</button>
+                <p class="message">
+                  
+                </p>
               </div>
             </div>
 

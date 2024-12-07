@@ -1362,24 +1362,6 @@ printSectionNavigationForOtherPages();
 
 //#region FORM
 
-// DDL Data
-let country = new Array("Select Country","California","Florida","Texas");
-let city = new Array
-(
-    ["Los Angeles", "San Francisco", "San Diego"],
-    ["Miami","Orlando","Tampa"],
-    ["Houston","Dallas","Austin"]
-);
-
-
-let ddlState = "";
-for(let i in country){
-    ddlState+=`<option value="${i}">${country[i]}</option>`
-}
-formDDLState.innerHTML = ddlState;
-
-//
-
 
 
 window.onload = function(){
@@ -1387,35 +1369,202 @@ window.onload = function(){
     formDDLCity.setAttribute("disabled","disabled");
     formSubmit.setAttribute("disabled","disabled");
     
-
 };
 
-let nameRegEx = /^[A-Z][a-z]{3,14}$/;
+//#region REGEX
 
+let nameRegEx = /^[A-ZČĆŠĐŽ][a-zčćšđž]{3,14}$/;
+
+let lastNameRegEx = /^([A-ZČĆŠĐŽ][a-zčćšđž]{3,19})(\s[A-Z][a-z]{3,19})*$/;
+
+//#endregion
+
+//#region FIRST NAME/LAST NAME CHECK
 formName.addEventListener("blur",function(){
 
     let nameValue = formName.value;
     if(!nameValue.match(nameRegEx)){
-        
-        formName.nextElementSibling.innerHTML = "Name must have between 3 and 15 letters";
+        formName.nextElementSibling.innerHTML = "Must start with Capital and must have at least 3-15 letters";
+        formName.classList.remove("green");
+        formName.classList.add("class","red");
+    }
+    else{
+        formName.nextElementSibling.innerHTML = "";
+        formName.classList.remove("red");
+        formName.classList.add("green");
+    }
+});
 
-       
+formLastName.addEventListener("blur",function(){
+
+    let lastNameValue = formLastName.value;
+    if(!lastNameValue.match(lastNameRegEx)){
+        
+        formLastName.nextElementSibling.innerHTML = "Must start with Capital and must have at least 3-20 letters";
+        formLastName.classList.remove("green");
+        formLastName.classList.add("class","red");
+    }
+    else{
+        formLastName.nextElementSibling.innerHTML = "";
+        formLastName.classList.remove("red");
+        formLastName.classList.add("green");
+    }
+});
+
+//#endregion
+
+//#region STATE/CITY CHECK
+
+// DDL Data
+let state = new Array("-- Select State --","California","Florida","Texas");
+let city = new Array
+(
+[
+    `<option value="0">-- Select City --</option>
+    <option value="1"> Los Angeles </option>
+    <option value="2"> San Francisco </option>
+    <option value="3"> San Diego </option>`
+],
+[
+    `<option value="0">-- Select City --</option>
+    <option value="1"> Miami </option>
+    <option value="2"> Orlando </option>
+    <option value="3"> Tampa </option>`
+],
+[
+    `<option value="0">-- Select City --</option>
+    <option value="1"> Houston </option>
+    <option value="2"> Dallas </option>
+    <option value="3"> Austin </option>`
+]
+);
+
+let ddlState = "";
+for(let i in state){
+    ddlState+=`<option value="${i}">${state[i]}</option>`
+}
+formDDLState.innerHTML = ddlState;
+
+
+formDDLState.addEventListener("change",function(){
+
+    let selectedState = formDDLState.value;
+    
+    if(selectedState == 0){
+        formDDLState.nextElementSibling.innerHTML = "Please select a State";
+        formDDLState.classList.remove("green");
+        formDDLState.classList.add("red");
+        formDDLCity.setAttribute("disabled","disabled");
+        formDDLCity.classList.remove("green");
+    }
+    else{
+        formDDLState.nextElementSibling.innerHTML = "";
+        formDDLState.classList.add("green");
+        formDDLState.classList.remove("red");
+        formDDLCity.removeAttribute("disabled");
+        formDDLCity.innerHTML = city[--selectedState];
+    }
+});
+
+formDDLCity.addEventListener("change",function(){
+
+     let selectedCity = formDDLCity.value;
+    console.log(selectedCity);
+     if(selectedCity == 0){
+
+        formDDLCity.nextElementSibling.innerHTML = "Please select a City";
+        formDDLCity.classList.remove("green");
+        formDDLCity.classList.add("red");
+     }
+     else{
+        formDDLCity.nextElementSibling.innerHTML = "";
+        formDDLCity.classList.add("green");
+        formDDLCity.classList.remove("red");
+     }
+})
+
+
+
+
+//#endregion
+
+//#region GENDER/RADIO BUTTONS CHECK
+
+
+
+//#endregion
+
+//#region GENDER(RADIO BUTTON), TERMS AND CONDITIONS(CHECKBOX), REGISTER(SUBMIT)
+
+formCB.addEventListener("change",function(){
+
+    if(formCB.checked){
+        formSubmit.removeAttribute("disabled");
+    }
+    else{
+        formSubmit.setAttribute("disabled","disabled");
+    }
+});
+
+let genderMessage = document.querySelector(".genderMsg");
+
+formRadioButton.forEach(input => {
+    input.addEventListener("change", function () {
+            if(input.checked) {
+                genderMessage.innerHTML = "";
+            }
+        });
+    });
+
+
+
+
+
+formSubmit.addEventListener("click",function(submit){
+
+    let numberOfErrors = 0;
+    submit.preventDefault();
+
+    if(formName.value == "" || formName.value == null){
+        
+        formName.classList.add("class","red");
+        formName.nextElementSibling.innerHTML = "Name field cannot be empty.";
+    }
+    else{
+        
     }
 
+    if(formLastName.value == "" || formLastName.value == null){
+
+        formLastName.classList.add("class","red");
+        formLastName.nextElementSibling.innerHTML = "Last Name field cannot be empty.";
+    }
+
+    if(formDDLState.value  == 0){
+
+        formDDLState.classList.add("class","red");
+        formDDLState.nextElementSibling.innerHTML = "You must choose a state.";
+    }
+
+    if(formDDLCity.value  == 0){
+
+        formDDLCity.classList.add("class","red");
+        formDDLCity.nextElementSibling.innerHTML = "First choose a state.";
+    }
+
+    let isGenderSelected = Array.from(formRadioButton).some(input => input.checked);
+    if (!isGenderSelected) {
+        genderMessage.innerHTML = "Please choose your gender.";
+    }
+    
 });
 
 
 
+//
+//
 
-
-
-
-
-
-
-
-
-
+//#endregion
 
 
 //#endregion
@@ -1424,6 +1573,15 @@ formName.addEventListener("blur",function(){
 //#region FOOTER
     printWholeFooter();
 //#endregion
+
+
+
+
+
+
+
+
+
 
 }
 
