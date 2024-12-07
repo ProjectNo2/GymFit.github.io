@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:media="http://search.google.com/mrss/">
+	<channel>
+	    <item>
+			<language>en</language>
+			<title>Discover your potential</title>
+			<link>https://projectno2.github.io/GymFit.github.io/index.html</link>
+			<description>
+                Book your early seat to get summer 25% dicsount
+            </description>
+			<webMaster>boris.jolovic.249.21@ict.edu.rs</webMaster>
+			<catergory>Sport</catergory>
+		</item>
+		<item>
+			<language>en</language>
+			<title>All new training courses</title>
+			<link>https://projectno2.github.io/GymFit.github.io/course.html</link>
+			<description>Book appointments and start training</description>
+			<webMaster>boris.jolovic.249.21@ict.edu.rs</webMaster>
+			<catergory>Sport</catergory>
+		</item>
+	</channel>
+</rss>

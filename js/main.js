@@ -1,4 +1,3 @@
-
 //#region conts 
 
 const index = "index.html";
@@ -47,6 +46,7 @@ const formSubmit = document.querySelector("#submit");
 let pathNameArray = window.location.pathname.split('/')
 let pathName = '/'+pathNameArray[pathNameArray.length-1]
 if(pathName == '/'){
+
     pathName = "/"+index;
 };
 
@@ -1522,41 +1522,49 @@ formRadioButton.forEach(input => {
 
 formSubmit.addEventListener("click",function(submit){
 
-    let numberOfErrors = 0;
+    let isFormValid = true;
     submit.preventDefault();
 
     if(formName.value == "" || formName.value == null){
         
         formName.classList.add("class","red");
         formName.nextElementSibling.innerHTML = "Name field cannot be empty.";
-    }
-    else{
-        
+        isFormValid = false;
     }
 
     if(formLastName.value == "" || formLastName.value == null){
 
         formLastName.classList.add("class","red");
         formLastName.nextElementSibling.innerHTML = "Last Name field cannot be empty.";
+        isFormValid = false;
     }
 
     if(formDDLState.value  == 0){
 
         formDDLState.classList.add("class","red");
         formDDLState.nextElementSibling.innerHTML = "You must choose a state.";
+        isFormValid = false;
     }
 
     if(formDDLCity.value  == 0){
 
         formDDLCity.classList.add("class","red");
-        formDDLCity.nextElementSibling.innerHTML = "First choose a state.";
+        formDDLCity.nextElementSibling.innerHTML = "First choose a state, then city.";
+        isFormValid = false;
     }
 
     let isGenderSelected = Array.from(formRadioButton).some(input => input.checked);
     if (!isGenderSelected) {
+
         genderMessage.innerHTML = "Please choose your gender.";
+        isFormValid = false;
     }
     
+    if(isFormValid){
+
+        formSubmit.nextElementSibling.innerHTML = "Registration successful! <i class='fa-solid fa-square-check' style='color: #00ff00;'></i>";
+        document.querySelector("#form").reset();
+    }
 });
 
 
@@ -1569,19 +1577,14 @@ formSubmit.addEventListener("click",function(submit){
 
 //#endregion
 
-
 //#region FOOTER
     printWholeFooter();
 //#endregion
 
 
+}
 
-
-
-
-
-
-
+if(pathName == '/author'){
 
 }
 
