@@ -401,8 +401,8 @@ function printWholeFooter() {
             "https://www.youtube.com/@ict7724",
             "https://twitter.com/?lang=sr",
             "#",
-            "#",
-            "#",
+            "rss/sitemap.xml",
+            "xml/sitemap.xml",
             "robots.txt"
         ],
 
