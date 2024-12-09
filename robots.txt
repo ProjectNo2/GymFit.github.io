@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /contact.html/
+Disallow: /author.html/
+Sitemap: https://projectno2.github.io/GymFit.github.io/xml/sitemap.xml
