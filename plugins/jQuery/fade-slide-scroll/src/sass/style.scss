@@ -1,0 +1,144 @@
+$primaryColor: #000;
+$font-family: 'Roboto', sans-serif;
+
+html, body {
+    scroll-behavior: smooth;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: $font-family;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	padding: 15px;
+	width: 700px;
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.d-block {
+    display: block;
+}
+
+.justify-content-center {
+	justify-content: center;
+}
+
+.justify-content-end {
+	justify-content: flex-end;
+}
+
+.c-banner {
+	background: #f1f1f1;
+	min-height: 100vh;
+	padding: 15px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+
+	> a {
+		position: absolute;
+		bottom: 16px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 22px;
+		cursor: pointer;
+		transition: all .3s;
+        
+		&:hover {
+			opacity: .5;
+		}
+		
+        img {
+			max-width: 100%;
+		}
+	}
+}
+
+.c-banner__title {
+	text-align: center;
+	margin: 0;
+	font-size: 50px;
+}
+
+.c-content {
+	min-height: 100vh;
+	overflow: hidden;
+	padding-top: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+
+	.container {
+		> div {
+			margin-bottom: 32px;
+		}
+	}
+	
+    > a {
+		position: absolute;
+		bottom: 15px;
+		left: 50%;
+		transform: translateX(-50%);
+		background: #b1b1b1;
+		padding: 8px 32px;
+		border-radius: 16px;
+		text-decoration: none;
+		color: $primaryColor;
+		font-weight: bold;
+		transition: all .3s;
+
+		&:hover {
+			opacity: .5;
+		}
+	}
+
+    p {
+        margin: 0;
+        font-size: 72px;
+        line-height: 1;
+    }
+}
+
+.c-funcionamento {
+	background: #f1f1f1;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+    line-height: 1.8;
+
+    code {
+        padding: 8px;
+        font-size: 14px;
+        background: #d4d4d4;
+        border-radius: 4px;
+
+        pre {
+            margin: 0;
+        }
+    }
+
+    ul, ol {
+        li {
+            margin-bottom: 0;
+
+            + li {
+                margin-top: 12px;
+            }
+        }
+    }
+}
