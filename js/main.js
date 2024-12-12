@@ -1,5 +1,6 @@
 //#region conts 
 
+//pages
 const index = "index.html";
 const about = "about.html";
 const trainer = "trainer.html";
@@ -7,6 +8,7 @@ const course = "course.html";
 const membership = "membership.html";
 const contact = "contact.html";
 const author = "author.html";
+ 
 const h2Class = "text-white text-capitalize";
 const rowH = document.querySelector("#rowH");
 const rowBlocksClass = "col-lg-4 col-md-6";
@@ -34,6 +36,8 @@ const RowJustifyCC = "row justify-content-center";
 const packagePricingContainerIdColor = document.querySelector("#packagePricingHeaderColor");
 const newMemberDiscountId = document.querySelector("#newMemberDiscount");
 const PPBlocksColor = document.querySelector("#PPBlocks");
+
+// form
 const formDDLState = document.querySelector("#ddlState");
 const formDDLCity = document.querySelector("#ddlCity");
 const formName = document.querySelector("#name");
@@ -400,7 +404,7 @@ function printWholeFooter() {
             "https://www.facebook.com/visokaictskola",
             "https://www.youtube.com/@ict7724",
             "https://twitter.com/?lang=sr",
-            "#",
+            "Documentation.pdf",
             "rss/sitemap.xml",
             "xml/sitemap.xml",
             "robots.txt"
@@ -471,7 +475,7 @@ var rowNumbers = new Array("<span class='number'>01</span>","<span class='number
 var innerBlockHeader = new Array("Modern Equipment","Proffesional Trainer","Healthy Diet Plan");
 var innerText = new Array("Start using the latest machines for maximum results and safety. Modern tools for every fitness level!","Train with experienced professionals dedicated to your progress. Years of expertise to guide you to success.","Customized meal plans to complement your workouts. Eat smart, feel great!");
 
-var moreDetailsLink =`<a href="about.html" class="text-color text-uppercase font-size-13 letter-spacing font-weight-bold"><i class="ti-minus mr-2 "></i>More Details</a>`;
+var moreDetailsLink =`<a id='test' href="about.html" class="text-color text-uppercase font-size-13 letter-spacing font-weight-bold"><i class="ti-minus mr-2 "></i>More Details</a>`;
 
 var rowInnerHTML ="";
 for(i in innerBlockHeader){
@@ -516,19 +520,6 @@ var osbInnerText = new Array(
     
     "Improve your overall health with dynamic fitness programs designed for all levels. Stay active, energized, and committed to a healthier lifestyle."
 );
-
-// var sectionPrint ="";
-// for(s in osbInnerHeader){
-//     sectionPrint+=`<div class="${ourServicesBlock}">
-//                     <div class="${ourServicesInnerBlock}">
-//                         <i class="${osbIcons[s]} text-lg text-color"></i>
-//                         <h4 class="${osbInnerh4}">${osbInnerHeader[s]}</h4>
-//                         <p>${osbInnerText[s]}</p>
-//                     </div>
-//                    </div>`
-// }
-// osbSection.innerHTML = sectionPrint;
-
 
 osbIcons.forEach((icon, index) => {
     
@@ -916,7 +907,9 @@ let ourTrainerObj = {
         "fa-brands fa-facebook",
         "fa-brands fa-x-twitter",
         "fa-brands fa-linkedin"
-    ]
+    ],
+
+    aboutMeText : "About Me"
 
 };
 
@@ -1273,7 +1266,7 @@ let PPBlocksColorObj = {
 
     supClass: "text-sm position-absolute",
 
-    priceText: ["12", "29", "39"],
+    priceText: ["9", "21", "29"],
 
     subText: "per month",
 
@@ -1488,10 +1481,6 @@ formDDLCity.addEventListener("change",function(){
 
 //#endregion
 
-//#region GENDER/RADIO BUTTONS CHECK
-
-
-
 //#endregion
 
 //#region GENDER(RADIO BUTTON), TERMS AND CONDITIONS(CHECKBOX), REGISTER(SUBMIT)
@@ -1574,9 +1563,6 @@ formSubmit.addEventListener("click",function(submit){
 
 //#endregion
 
-
-//#endregion
-
 //#region FOOTER
     printWholeFooter();
 //#endregion
@@ -1587,4 +1573,21 @@ formSubmit.addEventListener("click",function(submit){
 if(pathName == '/author'){
 
 }
+
+//#region jQuerry
+
+$(document).ready(function(){
+
+    $('#rowH > div > div').children('.test').hide("fast");
+    
+    $(`#rowH > div > div`).hover(
+    function(){
+        $(this).children('#test').show();
+    },
+    function(){
+        $(this).children('#test').hide()
+    });
+});
+
+document.querySelector("#containerBlocks > div").classList.add("toggle");
 
