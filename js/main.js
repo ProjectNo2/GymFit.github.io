@@ -9,9 +9,18 @@ const membership = "membership.html";
 const contact = "contact.html";
 const author = "author.html";
  
+const rowNumberSpanClass = "number";
 const h2Class = "text-white text-capitalize";
 const rowH = document.querySelector("#rowH");
 const rowBlocksClass = "col-lg-4 col-md-6";
+const containerH3Class = "mt-3";
+const containerPClassName = "mt-3 mb-4";
+const containerLinkClass = "text-color text-uppercase font-size-13 letter-spacing font-weight-bold";
+const containerIconClass = "ti-minus mr-2 ";
+const servicesId = document.querySelector("#servicesId");
+const servicesDivClass = "col-lg-4 col-md-6 col-sm-6";
+const servicesInnerClass = "text-center  px-4 py-5 hover-style-1";
+const servicesH4Class = "mt-3 mb-4 text-uppercase";
 const gallery = document.querySelector("#gallery");
 const container = document.querySelector("#containerBlocks");
 const popularCourses = document.querySelector("#Popular-Courses");
@@ -391,7 +400,7 @@ function printWholeFooter() {
 
         divClass: "col-lg-4",
 
-        copyrightText: '<p class="text-white mt-3">Copyright &copy; 2024 Boris Jolović</p>',
+        copyrightText: '<p class="text-white mt-3">Copyright &copy; 2025 Boris Jolović</p>',
 
         pcInnerBlockClass: "col-lg-6 ml-auto text-right",
 
@@ -410,7 +419,9 @@ function printWholeFooter() {
             "robots.txt"
         ],
 
-        icons: ['<i class="fa-brands fa-facebook"></i>',
+        icons : 
+        [
+            '<i class="fa-brands fa-facebook"></i>',
             '<i class="fa-brands fa-youtube"></i>',
             '<i class="fa-brands fa-x-twitter"></i>',
             '<i class="fa-regular fa-file-pdf"></i>',
@@ -468,79 +479,186 @@ printNavigationBar();
 
 //#endregion
 
-//#region ROW-BLOCKS
+//#region SECTION
 
-var rowInnerBlock = new Array("card p-5 border-0 rounded-top border-bottom position-relative hover-style-1","card p-5 border-0 rounded-top hover-style-1","card p-5 border-0 rounded-top hover-style-1");
-var rowNumbers = new Array("<span class='number'>01</span>","<span class='number'>02</span>","<span class='number'>03</span>");
-var innerBlockHeader = new Array("Modern Equipment","Proffesional Trainer","Healthy Diet Plan");
-var innerText = new Array("Start using the latest machines for maximum results and safety. Modern tools for every fitness level!","Train with experienced professionals dedicated to your progress. Years of expertise to guide you to success.","Customized meal plans to complement your workouts. Eat smart, feel great!");
+var containerObj = {
+    
+    containerClass : rowBlocksClass,
 
-var moreDetailsLink =`<a id='test' href="about.html" class="text-color text-uppercase font-size-13 letter-spacing font-weight-bold"><i class="ti-minus mr-2 "></i>More Details</a>`;
+    containerInnerClass : new Array
+    ("card p-5 border-0 rounded-top border-bottom position-relative hover-style-1",
+    "card p-5 border-0 rounded-top hover-style-1",
+    "card p-5 border-0 rounded-top hover-style-1"
+    ),
 
-var rowInnerHTML ="";
-for(i in innerBlockHeader){
-    rowInnerHTML+=
-    `<div class="${rowBlocksClass}"">
-        <div class="${rowInnerBlock[i]}">
-            ${rowNumbers[i]}
-            <h3 class="mt-3">${innerBlockHeader[i]}</h3>
-            <p class="mt-3 mb-4">${innerText[i]}</p>
-            ${moreDetailsLink}
-        </div>
-    </div>`
-}
-rowH.innerHTML = rowInnerHTML;
+    containerSpanClass : "number",
+
+    containerSpanValue : new Array (1,2,3),
+
+    containerH3Class : containerH3Class,
+
+    containerH3Value : new Array ("Modern Equipment","Profesional Trainer","Healthy Diet Plan"),
+
+    containerPClass : containerPClassName,
+
+    containerPValue : 
+    [
+        "Start using the latest machines for maximum results and safety. Modern tools for every fitness level!",
+        "Train with experienced professionals dedicated to your progress. Years of expertise to guide you to success.",
+        "Customized meal plans to complement your workouts. Eat smart, feel great!"
+    ],
+
+    containerLinkHref : about,
+
+    containerLinkClassValue : containerLinkClass,
+
+    containerIconClassValue : containerIconClass,
+
+    containerIconText : "More Details"
+};
+
+var containerPrint = "";
+
+for(let i = 0; i < 3; i++){
+    containerPrint+=`<div class="${containerObj.containerClass}">
+                        <div class="${containerObj.containerInnerClass[i]}">
+                            <span class="${containerObj.containerSpanClass}">
+                                ${containerObj.containerSpanValue[i]}
+                            </span>
+                                <h3 class="${containerObj.containerH3Class}">
+                                    ${containerObj.containerH3Value[i]}
+                                </h3>
+                                    <p class="${containerObj.pClass}">
+                                        ${containerObj.containerPValue[i]}
+                                    </p>
+                                        <a href="${containerObj.containerLinkHref}" class="${containerObj.containerLinkClassValue}">
+                                            <i class="${containerObj.containerIconClassValue}"></i>
+                                                ${containerObj.containerIconText}
+                                        </a>
+                        </div>
+                    </div>
+                    `;
+};
+
+rowH.innerHTML = containerPrint;
 
 //#endregion
 
-//#region SECTION
+//#region SERVICES
 
-var osbSection = document.querySelector("#osbSection");
-
-var ourServicesBlock ="col-lg-4 col-md-6 col-sm-6";
-
-var ourServicesInnerBlock ="text-center px-4 py-5 hover-style-1";
-
-var osbIcons = new Array("icofont-gym-alt-2","icofont-cycling-alt","icofont-gym-alt-3","icofont-muscle","icofont-dumbbell","icofont-gym");
-
-var osbInnerHeader = new Array("Weight Lifting","Cycling","Yoga Meditation","Body Building","Fitness Track","Fitness");
-
-var osbInnerh4 ="mt-3 mb-4 text-uppercase";
-
-var osbInnerText = new Array(
-    "Build strength and improve muscle tone with effective weightlifting routines. Achieve your fitness goals with guided techniques and proper form.",
-
-    "Boost your endurance and burn calories with high-energy cycling sessions. Enjoy a fun and effective way to improve cardiovascular health.",
-
-    "Enhance flexibility and inner peace through guided yoga and meditation practices. Find balance and relieve stress in a calming environment.",
-
-    "Sculpt your physique and build muscle with tailored bodybuilding programs. Achieve strength and definition with expert guidance and discipline.",
+var servicesObj = {
     
-    "Monitor your progress and stay motivated with advanced fitness tracking tools. Set goals, track achievements, and celebrate your success.",
+    servicesClass : servicesDivClass,
+
+    servicesInnerBlockClass : servicesInnerClass,
+
+    servicesIconClass : 
+    [
+        "icofont-gym-alt-2 text-lg text-color",
+        "icofont-cycling-alt text-lg text-color",
+        "icofont-gym-alt-3 text-lg text-color",
+        "icofont-muscle text-lg text-color",
+        "icofont-dumbbell text-lg text-color",
+        "icofont-gym text-lg text-color"
+    ],
+
+    servicesH4ClassName : servicesH4Class,
+
+    servicesH4Text : 
+    [
+        "Weight Lifting",
+        "Cycling",
+        "Yoga Meditation",
+        "Body Building",
+        "Fitness Track",
+        "Fitness"
+    ],
+
+    servicesPText : 
+    [
+        "Build strength and improve muscle tone with effective weightlifting routines. Achieve your fitness goals with guided techniques and proper form",
+
+        "Boost your endurance and burn calories with high-energy cycling sessions. Enjoy a fun and effective way to improve cardiovascular health.",
+
+        "Enhance flexibility and inner peace through guided yoga and meditation practices. Find balance and relieve stress in a calming environment.",
+
+        "Sculpt your physique and build muscle with tailored bodybuilding programs. Achieve strength and definition with expert guidance and discipline.",
+        
+        "Monitor your progress and stay motivated with advanced fitness tracking tools. Set goals, track achievements, and celebrate your success.",
+        
+        "Improve your overall health with dynamic fitness programs designed for all levels. Stay active, energized, and committed to a healthier lifestyle."
+    ]
+};
+
+var servicesPrint = "";
+
+for(let i in servicesObj.servicesIconClass){
+
+    servicesPrint+=`<div class="${servicesObj.servicesClass}">
+                        <div class="${servicesObj.servicesInnerBlockClass}">
+                            <i class="${servicesObj.servicesIconClass[i]}"></i>
+                                <h4 class="${servicesObj.servicesH4ClassName}">
+                                    ${servicesObj.servicesH4Text[i]}
+                                </h4>
+                                    <p>
+                                        ${servicesObj.servicesPText[i]}
+                                    </p>
+                        </div>
+                    </div>
+                    `
+};
+
+servicesId.innerHTML = servicesPrint;
+
+// OTHER METHOD OF PRINTING USING createElement and appendChild FUNCTIONS
+
+// var osbSection = document.querySelector("#osbSection");
+
+// var ourServicesBlock ="card p-5 border-0 rounded-top hover-style-1";
+
+// var ourServicesInnerBlock ="text-center px-4 py-5 hover-style-1";
+
+// var osbIcons = new Array("icofont-gym-alt-2","icofont-cycling-alt","icofont-gym-alt-3","icofont-muscle","icofont-dumbbell","icofont-gym");
+
+// var osbInnerHeader = new Array("Weight Lifting","Cycling","Yoga Meditation","Body Building","Fitness Track","Fitness");
+
+// var osbInnerh4 ="mt-3 mb-4 text-uppercase";
+
+// var osbInnerText = new Array(
+//     "Build strength and improve muscle tone with effective weightlifting routines. Achieve your fitness goals with guided techniques and proper form.",
+
+//     "Boost your endurance and burn calories with high-energy cycling sessions. Enjoy a fun and effective way to improve cardiovascular health.",
+
+//     "Enhance flexibility and inner peace through guided yoga and meditation practices. Find balance and relieve stress in a calming environment.",
+
+//     "Sculpt your physique and build muscle with tailored bodybuilding programs. Achieve strength and definition with expert guidance and discipline.",
     
-    "Improve your overall health with dynamic fitness programs designed for all levels. Stay active, energized, and committed to a healthier lifestyle."
-);
-
-osbIcons.forEach((icon, index) => {
+//     "Monitor your progress and stay motivated with advanced fitness tracking tools. Set goals, track achievements, and celebrate your success.",
     
-    let outerDiv = createElementWithClass("div", "col-lg-4 col-md-6 col-sm-6");
+//     "Improve your overall health with dynamic fitness programs designed for all levels. Stay active, energized, and committed to a healthier lifestyle."
+// );
 
-    let innerDiv = createElementWithClass("div", "text-center px-4 py-5 hover-style-1");
+// osbIcons.forEach((icon, index) => {
+    
+//     let outerDiv = createElementWithClass("div", "card p-5 border-0 rounded-top hover-style-1");
 
-    let iconElement = createElementWithClass("i", icon + " text-lg text-color");
+//     let innerDiv = createElementWithClass("div", "text-center px-4 py-5 hover-style-1");
 
-    let header = createElementWithClass("h4", "mt-3 mb-4 text-uppercase");
-    header.textContent = osbInnerHeader[index];
+//     let iconElement = createElementWithClass("i", icon + " text-lg text-color");
 
-    let paragraph = document.createElement("p");
-    paragraph.textContent = osbInnerText[index];
+//     let header = createElementWithClass("h4", "mt-3 mb-4 text-uppercase");
+//     header.textContent = osbInnerHeader[index];
 
-    appendChildToParent(innerDiv,iconElement);
-    appendChildToParent(innerDiv,header);
-    appendChildToParent(innerDiv,paragraph);
-    appendChildToParent(outerDiv,innerDiv);
-    appendChildToParent(osbSection,outerDiv);
-});
+//     let paragraph = document.createElement("p");
+//     paragraph.textContent = osbInnerText[index];
+
+//     appendChildToParent(innerDiv,iconElement);
+//     appendChildToParent(innerDiv,header);
+//     appendChildToParent(innerDiv,paragraph);
+//     appendChildToParent(outerDiv,innerDiv);
+//     appendChildToParent(osbSection,outerDiv);
+// });
+
 
 //#endregion
 
@@ -1366,9 +1484,9 @@ window.onload = function(){
 
 //#region REGEX
 
-let nameRegEx = /^[A-ZČĆŠĐŽ][a-zčćšđž]{3,14}$/;
+let nameRegEx = /^[A-ZČĆŠĐŽ][a-zčćšđž]{2,14}$/;
 
-let lastNameRegEx = /^([A-ZČĆŠĐŽ][a-zčćšđž]{3,19})(\s[A-Z][a-z]{3,19})*$/;
+let lastNameRegEx = /^([A-ZČĆŠĐŽ][a-zčćšđž]{2,19})(\s[A-Z][a-z]{2,19})*$/;
 
 //#endregion
 
@@ -1571,23 +1689,9 @@ formSubmit.addEventListener("click",function(submit){
 }
 
 if(pathName == '/author'){
-
+ printNavigationBar();
 }
 
 //#region jQuerry
 
-$(document).ready(function(){
-
-    $('#rowH > div > div').children('.test').hide("fast");
-    
-    $(`#rowH > div > div`).hover(
-    function(){
-        $(this).children('#test').show();
-    },
-    function(){
-        $(this).children('#test').hide()
-    });
-});
-
-document.querySelector("#containerBlocks > div").classList.add("toggle");
 
