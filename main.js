@@ -1696,9 +1696,11 @@ if(pathName == '/author'){
 
 $(document).ready(function() {
 
-    setTimeout(function() {
-        setInterval(function() {
-            $('#joinUs').effect('bounce', { times: 1, distance: 60 }, 800);
-        }, 2000); 
+    setInterval(function() {
+        $('#joinUs')
+            .fadeOut(500)
+            .fadeIn(200);
     }, 1500);
 });
+
+//#endregion
