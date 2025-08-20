@@ -1694,4 +1694,11 @@ if(pathName == '/author'){
 
 //#region jQuerry
 
+$(document).ready(function() {
 
+    setInterval(function() {
+        $('#joinUs')
+            .fadeOut(500)
+            .fadeIn(200);
+    }, 1500);
+});
